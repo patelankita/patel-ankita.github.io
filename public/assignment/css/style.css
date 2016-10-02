@@ -3,5 +3,71 @@ input.form-control {
 }
 
 body {
-    padding-top: 36px;
+    padding-top: 65px;
+}
+
+.login-header{
+
+    margin-top: 40px;
+}
+
+.navbar-default{
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
+}
+
+.navbar-default .navbar-text{
+    color:#fff;
+}
+
+.navbar-default .navbar-link{
+    color:#fff;
+}
+
+.navbar-default .navbar-brand{
+    color:#fff;
+}
+
+
+@media (min-width: 992px) and (orientation:landscape) {
+    .col-md-4 {
+    }
+}
+
+.no-margin-bottom{
+    margin-bottom: 0px;
+}
+
+.navbar-text{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.up{
+    position: absolute;
+    padding-right: 0px;
+    height: 25px;
+}
+
+.widget-style{
+    background-color: white;
+    border-bottom-left-radius: 5px;
+}
+
+.h2-margin{
+    margin-top: 0px;
+    margin-bottom:0px;"
+}
+
+.p-w-list{
+    margin-top:10px;
+}
+
+.last-row{
+    margin-bottom: 60px;
+}
+
+.pos-widget{
+    position: relative;
 }
