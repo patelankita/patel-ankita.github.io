@@ -11,6 +11,18 @@ body {
     margin-top: 40px;
 }
 
+.blue-text{
+    color: #2e6da4;
+}
+
+.right-line{
+    height: 90vh;
+    border-right: 1px solid lightgrey;
+    margin-top: -20px;
+}
+.right-down{
+    margin-top: 20px;
+}
 .navbar-default{
     background-color: #337ab7;
     border-color: #2e6da4;
@@ -70,4 +82,12 @@ body {
 
 .pos-widget{
     position: relative;
+}
+
+.margin-r{
+    margin-right: 20px !important;
+}
+
+.nav-r{
+    margin-right:10px;
 }
