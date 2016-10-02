@@ -3,7 +3,7 @@ input.form-control {
 }
 
 body {
-    padding-top: 65px;
+    padding-top: 70px;
 }
 
 .login-header{
@@ -34,7 +34,7 @@ body {
 }
 
 .navbar-default .navbar-link{
-    color:#fff;
+    color:#fff !important;
 }
 
 .navbar-default .navbar-brand{
@@ -90,4 +90,8 @@ body {
 
 .nav-r{
     margin-right:10px;
+}
+
+a:hover{
+   text-decoration: none;
 }
