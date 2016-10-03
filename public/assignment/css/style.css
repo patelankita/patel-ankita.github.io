@@ -4,6 +4,8 @@ input.form-control {
 
 body {
     padding-top: 70px;
+    margin-bottom: 70px;
+    overflow-y: scroll;
 }
 
 .login-header{
@@ -16,7 +18,7 @@ body {
 }
 
 .right-line{
-    height: 90vh;
+    height: 87vh;
     border-right: 1px solid lightgrey;
     margin-top: -20px;
 }
