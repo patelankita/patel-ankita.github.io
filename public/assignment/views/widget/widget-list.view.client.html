@@ -1,0 +1,110 @@
+<div>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class=" pull-left">
+                        <div>
+                        <a href="#/user/{{model.uid}}/website/{{model.wid}}/page" class="navbar-link navbar-text pull-left margin-r">
+                            <span class="glyphicon glyphicon-chevron-left"/>
+                        </a>
+                        <a class="navbar-text pull-right">
+                            Widgets
+                        </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-2">
+                    <p class="navbar-text pull-right">
+                        <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/new" class="navbar-link">
+                            <span class="glyphicon glyphicon-plus"/>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container p-w-list">
+        <div class="container-fluid">
+            <div ng-repeat="widget in model.widgets" class="row p-w-list pos-widget">
+                <div ng-switch="widget.widgetType">
+                    <div ng-switch-when="HEADER" ng-switch="widget.size" class="col-xs-12">
+                        <div ng-switch-when="1">
+                            <h1>{{widget.text}}</h1>
+                        </div>
+                        <div ng-switch-when="2">
+                            <h2>{{widget.text}}</h2>
+                        </div>
+                        <div ng-switch-when="3">
+                            <h3>{{widget.text}}</h3>
+                        </div>
+                        <div ng-switch-when="4">
+                            <h4>{{widget.text}}</h4>
+                        </div>
+                        <div ng-switch-when="5">
+                            <h5>{{widget.text}}</h5>
+                        </div>
+                        <div ng-switch-when="6">
+                            <h6>{{widget.text}}</h6>
+                        </div>
+                    </div>
+
+                    <div ng-switch-when="HTML" class="col-xs-12">
+                        <div ng-bind-html="model.getSafeHtml(widget.text)">
+                        </div>
+                    </div>
+
+                    <div ng-switch-when="IMAGE" class="img-rounded col-xs-12">
+                        <img width="{{widget.width}}" src="{{widget.url}}">
+                    </div>
+
+                    <div ng-switch-when="YOUTUBE" class="img-rounded col-xs-12">
+                        <iframe height="345" ng-src={{model.checkSafeURL(widget.url)}} width={{widget.width}}></iframe>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                        <div class=" col-xs-2 col-sm-2 col-mid-1 col-lg-1 col-xs-offset-10 col-sm-offset-10 col-mid-offset-11 col-lg-offset-11 up">
+                            <div class="pull-right widget-style">
+                                <a href ng-click="model.editWidget(widget)"  class="navbar-link">
+                                    <span class="glyphicon glyphicon-cog"/>
+                                </a>
+                             <span class="glyphicon glyphicon-align-justify"/>
+                            </div>
+                        </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="row">
+                    <div class="col-xs-5 ">
+                        <p class="navbar-text">
+                            <a href="#" class="navbar-link nav-r">
+                                <span class="glyphicon glyphicon-play"/>
+                            </a>
+                            <a href="#" class="navbar-link">
+                                <span class="glyphicon glyphicon-eye-open"/>
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="col-xs-7 ">
+                        <p class="navbar-text pull-right">
+                            <a href="#/user/{{model.uid}}" class="navbar-link">
+                                <span class="glyphicon glyphicon-user"/>
+                            </a>
+                        </p>
+                    </div>
+            </div>
+        </div>
+    </nav>
+
+</div>

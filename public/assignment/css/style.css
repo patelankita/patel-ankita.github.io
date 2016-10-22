@@ -8,6 +8,14 @@ body {
     overflow-y: scroll;
 }
 
+.list-group-item{
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+    border-left-color: #fff;
+    border-right-color: #fff;
+
+}
+
 .login-header{
 
     margin-top: 40px;

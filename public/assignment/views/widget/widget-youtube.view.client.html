@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>page-edit</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <meta name="HandheldFriendly" content="true">
-    <link href="css/style.css" rel="stylesheet"/>
-</head>
-<body>
 <div>
 
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -17,11 +6,11 @@
                 <div class="col-xs-10">
                     <div class=" pull-left">
                         <div>
-                            <a href="page-list.html" class="navbar-link navbar-text pull-left margin-r">
+                            <a href="#/user/:uid/website/:wid/page/:pid/widget" class="navbar-link navbar-text pull-left margin-r">
                                 <span class="glyphicon glyphicon-chevron-left"/>
                             </a>
                             <p class="navbar-text pull-right">
-                                Edit Page
+                                Widget Edit
                             </p>
                         </div>
                     </div>
@@ -29,7 +18,7 @@
 
                 <div class="col-xs-2">
                     <p class="navbar-text pull-right">
-                        <a href="page-list.html" class="navbar-link">
+                        <a href="#/user/:uid/website/:wid/page/:pid/widget" class="navbar-link">
                             <span class="glyphicon glyphicon-ok"/>
                         </a>
                     </p>
@@ -41,15 +30,21 @@
     <div class="container">
         <form>
             <div class="form-group">
-                <label for="pname" class="no-margin-bottom">Name</label>
-                <input type="text" class="form-control" id="pname" value="Blog Post">
+                <label for="winame" class="no-margin-bottom">Name</label>
+                <input type="text" class="form-control" id="winame">
 
-                <label for="ptitle" class="no-margin-bottom">Title</label>
-                <input type="text" class="form-control" id="ptitle" placeholder="Page Title">
+                <label for="witext" class="no-margin-bottom">Text</label>
+                <input type="text" class="form-control" id="witext">
+
+                <label for="wiurl" class="no-margin-bottom">URL</label>
+                <input type="url" class="form-control" id="wiurl" value="https://www.youtube.com">
+
+                <label for="wiwidth" class="no-margin-bottom">Width</label>
+                <input type="text" class="form-control" id="wiwidth">
+
+                <a class="btn btn-danger  btn-block"
+                   href="#/user/:uid/website/:wid/page/:pid/widget">Delete</a>
             </div>
-
-            <a class="btn btn-danger  btn-block"
-               href="page-list.html">Delete</a>
         </form>
     </div>
 
@@ -60,7 +55,7 @@
                 </div>
                 <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
                     <p class="navbar-text pull-right">
-                        <a href="profile.html" class="navbar-link">
+                        <a href="#/user/:uid" class="navbar-link">
                             <span class="glyphicon glyphicon-user"/>
                         </a>
                     </p>
@@ -70,5 +65,3 @@
     </nav>
 
 </div>
-</body>
-</html>

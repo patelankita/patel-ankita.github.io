@@ -1,0 +1,63 @@
+<div>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class=" pull-left">
+                        <div>
+                            <a href="#/user/:uid/website/:wid/page/:pid/widget" class="navbar-link navbar-text pull-left margin-r">
+                                <span class="glyphicon glyphicon-chevron-left"/>
+                            </a>
+                            <p class="navbar-text pull-right">
+                                Widget Edit
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-2">
+                    <p class="navbar-text pull-right">
+                        <a href="#/user/:uid/website/:wid/page/:pid/widget" class="navbar-link">
+                            <span class="glyphicon glyphicon-ok"/>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="winame" class="no-margin-bottom">Name</label>
+                <input  type="text" class="form-control" id="winame">
+
+                <label for="witext" class="no-margin-bottom">Text</label>
+                <input type="text" class="form-control" id="witext" ng-model="model.widget.text">
+
+                <label for="wisize" class="no-margin-bottom">Size</label>
+                <input type="number" class="form-control" id="wisize" value="3" ng-model="model.widget.text">
+
+                <a class="btn btn-danger  btn-block" href="#/user/:uid/website/:wid/page/:pid/widget">Delete</a>
+            </div>
+        </form>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-10 col-sm-11 col-md-11 col-lg-11">
+                </div>
+                <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+                    <p class="navbar-text pull-right">
+                        <a href="#/user/:uid" class="navbar-link">
+                            <span class="glyphicon glyphicon-user"/>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</div>
