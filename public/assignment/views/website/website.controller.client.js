@@ -59,19 +59,17 @@
 
         function init() {
             vm.websites = WebsiteService.findWebsiteByUser(vm.uid);
-            console.log(vm.websites);
         }
         init();
 
         var web = WebsiteService.findWebsiteById(vm.wid);
-
         if (web != null) {
-            vm.web = web;
+            vm.website = web;
         }
 
         function updateWebsite(webId, newWebsite) {
             var nWebsite = WebsiteService.updateWebsite(webId, newWebsite);
-            // console.log(nWebsite);
+             console.log(nWebsite);
             if (nWebsite) {
                 $location.url("/user/" + $routeParams.uid + "/website");
             }

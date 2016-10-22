@@ -37,7 +37,7 @@
         }
     }
 
-    function NewWidgetController($routeParams, WidgetService){
+    function NewWidgetController($location ,$routeParams, WidgetService){
         var vm = this;
         vm.uid = $routeParams.uid;
         vm.wid = $routeParams.wid;
@@ -46,14 +46,16 @@
         vm.createWidget = createWidget;
 
         function createWidget(newWidgetType){
-                var newCreatedWidget = WidgetService.createWidget(vm.pid, newWidgetType);
+            var w = {};
+            w.WidgetType = newWidgetType;
+            var newCreatedWidget = WidgetService.createWidget(vm.pid, w);
 
-                if (newCreatedWidget) {
+            if (newCreatedWidget) {
                     $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + vm.wgid);
-                }
-                else {
-                    vm.error = "OOPS!! Something went wrong.. Please try again.."
-                }
+            }
+            else {
+                    vm.error = "OOPS!! Something went wrong.. Please try again..";
+            }
 
         }
     }
@@ -64,7 +66,8 @@
         vm.wid = $routeParams.wid;
         vm.pid = $routeParams.pid;
         vm.wgid = $routeParams.wgid;
-        vm.updateImageWidget = updateImageWidget;
+        vm.updateWidget = updateWidget;
+        vm.deleteWidget = vm.deleteWidget;
 
         function init() {
             vm.widget = WidgetService.findWidgetById(vm.wgid);
@@ -72,10 +75,25 @@
         }
         init();
 
-        function updateImageWidget(newWidget){
-            console.log("in controll")
-            var res = WidgetService.updateImageWidget(newWidget);
+        function updateWidget(newWidget){
+            var res = WidgetService.updateWidget(newWidget);
 
+            if(res){
+                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+            }
+            else{
+                vm.error ="OOPS!! Something went wrong.. Please try again..";
+            }
+
+        }
+
+        function deleteWidget() {
+            var res = WidgetService.deleteWidget(vm.wgid);
+            if (res) {
+                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+            } else {
+                vm.error = "OOPS!! Something went wrong.. Please try again..";
+            }
         }
 
     }

@@ -73,6 +73,7 @@
             for(var index=0; index<websites.length;index++){
                 if(websites[index]._id === websiteId){
                     websites.splice(index,1);
+                    console.log(websites);
                     return websites;
                 }
             }
