@@ -12,7 +12,6 @@
             vm.uid = $routeParams.uid;
             vm.wid = $routeParams.wid;
             vm.pages = PageService.findPageByWebsiteId(vm.wid);
-            console.log(vm.pages);
         }
         init();
     }
@@ -24,7 +23,8 @@
         vm.createNewPage = createNewPage;
 
         function createNewPage(userId,webId,newPage){
-            if(newPage.name === null){
+
+            if(newPage == null){
                 vm.error = "Please enter the Name of the page";
             }
             else{
@@ -62,7 +62,7 @@
                 $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
             }
             else {
-                vm.error = "Oops! Page id does not match !!"
+                vm.error = "Oops!! Page id does not match !!"
             }
         }
 
@@ -73,7 +73,7 @@
                 $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
             }
             else {
-                vm.error = "Opps!! Something went wrong..Please try again.."
+                vm.error = "Oops!! Something went wrong..Please try again.."
             }
 
         }

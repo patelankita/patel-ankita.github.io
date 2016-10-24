@@ -2,6 +2,10 @@ input.form-control {
     margin-bottom: 5px;
 }
 
+.navbar-default .navbar-brand{
+    color:#fff !important; ;
+}
+
 body {
     padding-top: 70px;
     margin-bottom: 70px;
@@ -45,10 +49,6 @@ body {
 
 .navbar-default .navbar-link{
     color:#fff !important;
-}
-
-.navbar-default .navbar-brand{
-    color:#fff;
 }
 
 

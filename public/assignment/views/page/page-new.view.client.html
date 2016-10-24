@@ -37,7 +37,12 @@
                 <input ng-model="model.page.title" type="text" class="form-control" id="title" placeholder="Page Title">
             </div>
         </form>
+        <div ng-show="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
+        </div>
     </div>
+
+
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">

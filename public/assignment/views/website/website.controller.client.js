@@ -74,7 +74,7 @@
                 $location.url("/user/" + $routeParams.uid + "/website");
             }
             else {
-                vm.error = "Oops! Website id does not match !!"
+                vm.error = "Oops!! Website id does not match !!"
             }
         }
 
@@ -86,7 +86,7 @@
                 $location.url("/user/" + $routeParams.uid + "/website");
             }
             else {
-                vm.error = "Opps!! Something went wrong..Please try again.."
+                vm.error = "Oops!! Something went wrong..Please try again.."
             }
 
         }

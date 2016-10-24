@@ -33,7 +33,13 @@
 
         function editWidget(w){
             console.log(w);
-            $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + w._id);
+            if (w.widgetType === "YOUTUBE" || w.widgetType === "IMAGE" || w.widgetType === "HEADER"){
+                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + w._id);
+            }
+            else{
+                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+            }
+
         }
     }
 
@@ -60,24 +66,24 @@
         }
     }
 
-    function EditWidgetController($routeParams, WidgetService){
+    function EditWidgetController($location, $routeParams, WidgetService){
         var vm = this;
         vm.uid = $routeParams.uid;
         vm.wid = $routeParams.wid;
         vm.pid = $routeParams.pid;
         vm.wgid = $routeParams.wgid;
         vm.updateWidget = updateWidget;
-        vm.deleteWidget = vm.deleteWidget;
+        vm.deleteWidget = deleteWidget;
 
         function init() {
             vm.widget = WidgetService.findWidgetById(vm.wgid);
+
 
         }
         init();
 
         function updateWidget(newWidget){
-            var res = WidgetService.updateWidget(newWidget);
-
+            var res = WidgetService.updateWidget(vm.wgid,newWidget);
             if(res){
                 $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
             }
@@ -87,8 +93,8 @@
 
         }
 
-        function deleteWidget() {
-            var res = WidgetService.deleteWidget(vm.wgid);
+        function deleteWidget(widget) {
+            var res = WidgetService.deleteWidget(widget._id);
             if (res) {
                 $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
             } else {
