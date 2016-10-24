@@ -32,7 +32,7 @@
         }
 
         function editWidget(w){
-            console.log(w);
+
             if (w.widgetType === "YOUTUBE" || w.widgetType === "IMAGE" || w.widgetType === "HEADER"){
                 $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + w._id);
             }
@@ -49,18 +49,20 @@
         vm.wid = $routeParams.wid;
         vm.pid = $routeParams.pid;
         vm.wgid = $routeParams.wgid;
+        vm.createYoutubeWidget = {"widgetType": "YOUTUBE", "pageId": vm.pid, "width": "" , "url": "" };
+        vm.createHeaderWidget ={ "_id": "", "widgetType": "HEADER", "pageId": vm.pid, "size": "", "text": ""};
+        vm.createImageWidget= { "_id": "", "widgetType": "IMAGE", "pageId": vm.pid, "width":"", "url": ""};
         vm.createWidget = createWidget;
 
-        function createWidget(newWidgetType){
-            var w = {};
-            w.WidgetType = newWidgetType;
-            var newCreatedWidget = WidgetService.createWidget(vm.pid, w);
+        function createWidget(newWidgetType) {
+
+            var newCreatedWidget = WidgetService.createWidget(vm.pid, newWidgetType);
 
             if (newCreatedWidget) {
-                    $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + vm.wgid);
+                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + newCreatedWidget._id);
             }
             else {
-                    vm.error = "OOPS!! Something went wrong.. Please try again..";
+                vm.error = "OOPS!! Something went wrong.. Please try again..";
             }
 
         }

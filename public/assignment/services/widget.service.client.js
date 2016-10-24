@@ -28,14 +28,13 @@
         return api;
 
         function createWidget(pageId, widget){
-            var nWidget = {
-                _id :(new Date()).getTime()+"" ,
-                widgetType : widget.widgetType,
-                pageId :pageId,
-                size : widget.size,
-                text : widget.text
-                };
+            var nWidget = widget;
+
+            nWidget._id = (new Date()).getTime()+"";
+            nWidget.pageId = pageId;
+
             widgets.push(nWidget);
+
             return nWidget;
         }
 
