@@ -48,7 +48,10 @@ body {
 }
 
 .navbar-default .navbar-link{
-    color:#fff !important;
+    color:#fff  !important;
+}
+.navbar-default .navbar-toggle:hover{
+    color:#fff;
 }
 
 
@@ -82,9 +85,9 @@ body {
     margin-bottom:0px;"
 }
 
-.p-w-list{
-    margin-top:10px;
-}
+/*.p-w-list{*/
+    /*margin-top:10px;*/
+/*}*/
 
 .last-row{
     margin-bottom: 60px;
