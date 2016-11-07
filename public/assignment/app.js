@@ -1,3 +1,3 @@
 (function (){ // IIFE
-    angular.module("WebAppMaker", ["ngRoute"]);
+    angular.module("WebAppMaker", ["ngRoute", "jgaDirectives"]);
 })();

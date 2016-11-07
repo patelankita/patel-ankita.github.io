@@ -13,11 +13,21 @@
         vm.getSafeHtml = getSafeHtml;
         vm.checkSafeURL = checkSafeURL;
         vm.editWidget = editWidget;
-        function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pid);
 
+        function init() {
+            var promise = WidgetService.findWidgetsByPageId(vm.pid);
+            promise
+                .success(function(widget){
+                    if(widget != '0') {
+                        vm.widgets = widget;
+                    }
+                })
+                .error(function(ERROR){
+                    vm.error = "ERROR";
+                });
         }
         init();
+
 
         function getSafeHtml(text) {
             return $sce.trustAsHtml(text);
@@ -49,22 +59,22 @@
         vm.wid = $routeParams.wid;
         vm.pid = $routeParams.pid;
         vm.wgid = $routeParams.wgid;
-        vm.createYoutubeWidget = {"widgetType": "YOUTUBE", "pageId": vm.pid, "width": "" , "url": "" };
+        vm.createYoutubeWidget = {"_id": "" , "widgetType": "YOUTUBE", "pageId": vm.pid, "width": "" , "url": "" };
         vm.createHeaderWidget ={ "_id": "", "widgetType": "HEADER", "pageId": vm.pid, "size": "", "text": ""};
-        vm.createImageWidget= { "_id": "", "widgetType": "IMAGE", "pageId": vm.pid, "width":"", "url": ""};
+        vm.createImageWidget= { "_id": "", "widgetType": "IMAGE", "pageId": vm.pid, "width": "", "url": ""};
         vm.createWidget = createWidget;
 
         function createWidget(newWidgetType) {
 
-            var newCreatedWidget = WidgetService.createWidget(vm.pid, newWidgetType);
-
-            if (newCreatedWidget) {
-                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + newCreatedWidget._id);
-            }
-            else {
-                vm.error = "OOPS!! Something went wrong.. Please try again..";
-            }
-
+                var promise = WidgetService.createWidget(vm.pid, newWidgetType);
+                promise
+                    .success(function (widget) {
+                        //console.log(page);
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
+                    })
+                    .error(function (ERROR) {
+                        vm.error = "ERROR..OOPS!! Something went wrong.. Please try again..";
+                    });
         }
     }
 
@@ -78,30 +88,43 @@
         vm.deleteWidget = deleteWidget;
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.wgid);
+            var promise = WidgetService.findWidgetById(vm.wgid);
+            promise
+                .success(function (widget) {
+                    // console.log(page);
+                    if (widget != '0') {
+                        vm.widget = widget;
+                    }
+                })
+                .error(function (ERROR) {
+                    vm.error = "ERROR";
+                });
 
 
         }
         init();
 
         function updateWidget(newWidget){
-            var res = WidgetService.updateWidget(vm.wgid,newWidget);
-            if(res){
-                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
-            }
-            else{
-                vm.error ="OOPS!! Something went wrong.. Please try again..";
-            }
+            WidgetService.updateWidget(vm.wgid,newWidget)
+                .then(function (response) {
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+                },
+                function (error) {
+                    vm.error = "Oops!! Page id does not match !!";
+                });
 
         }
 
         function deleteWidget(widget) {
-            var res = WidgetService.deleteWidget(widget._id);
-            if (res) {
-                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
-            } else {
-                vm.error = "OOPS!! Something went wrong.. Please try again..";
-            }
+
+            var promise = WidgetService.deleteWidget(widget._id);
+            promise
+                .success(function (success) {
+                    $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+                })
+                .error(function (ERROR) {
+                    vm.error = "ERROR..OOPS!! Something went wrong.. Please try again..";
+                });
         }
 
     }

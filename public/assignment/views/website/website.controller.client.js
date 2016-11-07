@@ -11,11 +11,20 @@
             vm.uid = $routeParams.uid;
 
             function init(){
-                vm.websites = WebsiteService.findWebsiteByUser(vm.uid);
-                console.log(vm.websites);
+                var promise = WebsiteService.findWebsiteByUser(vm.uid);
+                //console.log(promise);
+                promise
+                    .success(function(website){
+                        //console.log(website);
+                        if(website != '0') {
+                        vm.websites = website;
+                    }
+                })
+                    .error(function(ERROR){
+                        vm.error = "ERROR";
+                    });
             }
             init();
-
     }
 
     function NewWebsiteController($routeParams, WebsiteService, $location) {
@@ -25,8 +34,16 @@
         vm.createNewWebsite = createNewWebsite;
 
         function init(){
-            vm.websites = WebsiteService.findWebsiteByUser(vm.uid);
-            console.log(vm.websites);
+            var promise = WebsiteService.findWebsiteByUser(vm.uid);
+            promise
+                .success(function(website){
+                    if(website != '0') {
+                        vm.websites = website;
+                    }
+                })
+                .error(function(ERROR){
+                    vm.error = "ERROR";
+                });
         }
         init();
 
@@ -35,14 +52,22 @@
                 vm.error="Please enter the Name of the website";
             }
             else{
-                var newCreatedWebsite = WebsiteService.createWebsite($routeParams.uid, newWebsite);
-                console.log(newCreatedWebsite);
-                if (newCreatedWebsite) {
-                    $location.url("/user/" + $routeParams.uid +"/website");
-                }
-                else {
-                    vm.error = "OOPS!! Something went wrong.. Please try again.."
-                }
+                var promise = WebsiteService.createWebsite($routeParams.uid, newWebsite);
+                promise
+                    .success(function (website) {
+                       // console.log(website);
+                        $location.url("/user/" + $routeParams.uid + "/website");
+                    })
+                    .error(function (ERROR) {
+                        vm.error = "ERROR..OOPS!! Something went wrong.. Please try again..";
+                    });
+                // console.log(newCreatedWebsite);
+                // if (newCreatedWebsite) {
+                //     $location.url("/user/" + $routeParams.uid +"/website");
+                // }
+                // else {
+                //     vm.error = "OOPS!! Something went wrong.. Please try again.."
+                // }
 
             }
         }
@@ -57,37 +82,77 @@
         vm.deleteWebsite = deleteWebsite;
         vm.updateWebsite = updateWebsite;
 
-        function init() {
-            vm.websites = WebsiteService.findWebsiteByUser(vm.uid);
+        function init(){
+            var promise = WebsiteService.findWebsiteByUser(vm.uid);
+            promise
+                .success(function(website){
+                    if(website != '0') {
+                        vm.websites = website;
+                    }
+                })
+                .error(function(ERROR){
+                    vm.error = "ERROR";
+                });
         }
         init();
 
-        var web = WebsiteService.findWebsiteById(vm.wid);
-        if (web != null) {
-            vm.website = web;
-        }
+        function initialize() {
+            var promise = WebsiteService.findWebsiteById(vm.wid);
+            promise
+                .success(function (website) {
+                    console.log(website);
+                    if (website != '0') {
+                        vm.website = website;
+                    }
+                })
+                .error(function (ERROR) {
+                    vm.error = "ERROR";
+                });
+        }initialize();
+
 
         function updateWebsite(webId, newWebsite) {
-            var nWebsite = WebsiteService.updateWebsite(webId, newWebsite);
-             console.log(nWebsite);
-            if (nWebsite) {
-                $location.url("/user/" + $routeParams.uid + "/website");
-            }
-            else {
-                vm.error = "Oops!! Website id does not match !!"
-            }
+
+            WebsiteService.updateWebsite(webId, newWebsite)
+                .then(function (response) {
+                        $location.url("/user/" + $routeParams.uid + "/website");
+                    },
+                    function (error) {
+                        vm.error = "Oops!! Website id does not match !!";
+                    });
+
+            // var promise = WebsiteService.updateWebsite(webId, newWebsite);
+            // promise
+            //     .success
+            //  console.log(nWebsite);
+            // if (nWebsite) {
+            //     $location.url("/user/" + $routeParams.uid + "/website");
+            // }
+            // else {
+            //     vm.error = "Oops!! Website id does not match !!"
+            // }
         }
 
         function deleteWebsite(websiteId) {
-            var result = WebsiteService.deleteWebsite(websiteId);
-            // console.log(result);
+            var promise = WebsiteService.deleteWebsite(websiteId);
+            promise
+                .success(function (success) {
+                    $location.url("/user/" + $routeParams.uid + "/website");
+                })
+                .error(function (ERROR) {
+                    vm.error = "ERROR..OOPS!! Something went wrong.. Please try again..";
+                });
 
-            if (result != null) {
-                $location.url("/user/" + $routeParams.uid + "/website");
-            }
-            else {
-                vm.error = "Oops!! Something went wrong..Please try again.."
-            }
+
+            // var result = WebsiteService.deleteWebsite(websiteId);
+            // // console.log(result);
+            //
+            // if (result != null) {
+            //     $location.url("/user/" + $routeParams.uid + "/website");
+            // }
+            // else {
+            //     vm.error = "Oops!! Something went wrong..Please try again.."
+            // }
 
         }
     }
