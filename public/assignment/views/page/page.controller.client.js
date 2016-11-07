@@ -34,7 +34,7 @@
 
         function createNewPage(userId,webId,newPage){
 
-            if(newPage == null){
+            if(newPage.name == null){
                 vm.error = "Please enter the Name of the page";
             }
             else{
