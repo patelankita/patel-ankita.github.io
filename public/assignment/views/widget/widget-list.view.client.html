@@ -61,8 +61,10 @@
                         <img width="{{widget.width}}" src="{{widget.url}}">
                     </div>
 
-                    <div ng-switch-when="YOUTUBE" class="col-xs-12" class="youtube-widget"  >
-                        <iframe  ng-src={{model.checkSafeURL(widget.url)}} width={{widget.width}}></iframe>
+                    <div ng-switch-when="YOUTUBE" class="img-rounded col-xs-12" ng-style="{'width' : widget.width}">
+                        <div class="embed-responsive embed-responsive-16by9">
+                        <iframe  ng-src={{model.checkSafeURL(widget.url)}} allowfullscreen></iframe>
+                        </div>
                     </div>
 
                     <div ng-switch-when="TEXT" class="img-rounded col-xs-12">
