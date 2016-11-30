@@ -1,16 +1,18 @@
-module.exports = function(app) {
+module.exports = function(app, model) {
 
-    var widgets = [
-        { "_id": "123", "widgetType": "HEADER", "pageId": "432", "size": 2, "text": "GIZMODO"},
-        { "_id": "234", "widgetType": "HEADER", "pageId": "432", "size": 4, "text": "Lorem ipsum"},
-        { "_id": "345", "widgetType": "IMAGE", "pageId": "432", "width": "100%",
-            "url": "http://lorempixel.com/400/200/"},
-        { "_id": "456", "widgetType": "HTML", "pageId": "432", "text": '<p>Watchmaker <a href="http://gizmodo.com/tag/mbf" rel="nofollow">MB&amp;F</a> isn’t as well-known as  Rolex or Timex, but that’s because the company’s unique creations—like a <a href="http://gizmodo.com/listen-to-an-18-000-tie-fighter-music-box-play-the-sta-1717444112" rel="nofollow">TIE Fighter-shaped music box</a> that plays the <em>Star Wars</em> theme—are made for die-hard collectors. Its latest creation is a <a href="https://www.mbandf.com/en/machines/co-creations/astrograph" target="_blank" rel="noopener">rocket-shaped pen inspired by the moon landing</a>, and I’m desperately trying to justify…<span class="read-more-placeholder"></span><span class="readmore-core-decorated"></span></p>'},
-        { "_id": "567", "widgetType": "HEADER", "pageId": "543", "size": 4, "text": "Lorem ipsum"},
-        { "_id": "678", "widgetType": "YOUTUBE", "pageId": "432", "width": "100%",
-            "url": "https://youtu.be/AM2Ivdi9c4E" },
-        { "_id": "789", "widgetType": "HTML", "pageId": "543", "text": '<p>Lorem ipsum</p>'}
-    ];
+    // var widgets = [
+    //     { "_id": "123", "widgetType": "HEADER", "pageId": "432", "size": 2, "text": "GIZMODO"},
+    //     { "_id": "234", "widgetType": "HEADER", "pageId": "432", "size": 4, "text": " "},
+    //     { "_id": "345", "widgetType": "IMAGE", "pageId": "432", "width": "100%",
+    //         "url": "http://lorempixel.com/400/200/"},
+    //     { "_id": "456", "widgetType": "HTML", "pageId": "432", "text": '<p>Watchmaker <a href="http://gizmodo.com/tag/mbf" rel="nofollow">MB&amp;F</a> isn’t as well-known as  Rolex or Timex, but that’s because the company’s unique creations—like a <a href="http://gizmodo.com/listen-to-an-18-000-tie-fighter-music-box-play-the-sta-1717444112" rel="nofollow">TIE Fighter-shaped music box</a> that plays the <em>Star Wars</em> theme—are made for die-hard collectors. Its latest creation is a <a href="https://www.mbandf.com/en/machines/co-creations/astrograph" target="_blank" rel="noopener">rocket-shaped pen inspired by the moon landing</a>, and I’m desperately trying to justify…<span class="read-more-placeholder"></span><span class="readmore-core-decorated"></span></p>'},
+    //     { "_id": "567", "widgetType": "HEADER", "pageId": "543", "size": 4, "text": "Lorem ipsum"},
+    //     { "_id": "678", "widgetType": "YOUTUBE", "pageId": "432", "width": "100%",
+    //         "url": "https://youtu.be/AM2Ivdi9c4E" },
+    //     { "_id": "789", "widgetType": "HTML", "pageId": "543", "text": '<p>Lorem ipsum</p>'}
+    // ];
+
+    var widgetModel = model.widgetModel;
 
     var multer = require('multer');
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
@@ -24,70 +26,125 @@ module.exports = function(app) {
     app.put("/page/:pageId/widget", sortWidget);
 
 
-    function sortWidget(req, res) {
-        var start = req.query.initial;
-        var end = req.query.final;
-        widgets.splice(end, 0, widgets.splice(start, 1)[0]);
-    }
-
     function createWidget(req, res) {
         var widget = req.body;
         var pId = req.params.pageId;
-        widget.pageId = pId;
-        widget._id = (new Date().getTime()).toString();
-        widgets.push(widget);
-        res.send(widget);
+        // console.log(jhgjhgjgjgjkh);
+        widgetModel
+            .createWidget(pId, widget)
+            .then(function (newWidget) {
+
+                    // console.log(newWidget);
+                    res.send(newWidget);
+                },
+                function (err) {
+                    res.sendStatus(400).send(err);
+                });
+
+        // widget.pageId = pId;
+        // widget._id = (new Date().getTime()).toString();
+        // widgets.push(widget);
+        // res.send(widget);
     }
 
     function findAllWidgetsForPage(req, res) {
         var pid = req.params.pageId;
-        var result = [];
-        for(var w in widgets) {
-            if(widgets[w].pageId === pid) {
-                result.push(widgets[w]);
-                // res.send(result);
-                // return;
-            }
-        }
-        res.send(result);
+
+        widgetModel
+            .findAllWidgetsForPage(pid)
+            .then(
+                function(widgets) {
+                    console.log(widgets);
+                    res.json(widgets);
+                },
+                function(error) {
+                    res.statusCode(400).send(error);
+                }
+            );
+
+        // var result = [];
+        // for(var w in widgets) {
+        //     if(widgets[w].pageId === pid) {
+        //         result.push(widgets[w]);
+        //         // res.send(result);
+        //         // return;
+        //     }
+        // }
+        // res.send(result);
     }
 
     function findWidgetById(req, res) {
         var wid = req.params.widgetId;
+
+        widgetModel
+            .findWidgetById(wid)
+            .then(
+                function(widget) {
+                    res.send(widget);
+                },
+                function(error) {
+                    res.statusCode(400).send(error);
+                }
+            );
         //var result = [];
-        for(var w in widgets) {
-            if(widgets[w]._id === wid) {
-                //result.push(websites[w]);
-                res.send(widgets[w]);
-                return;
-            }
-        }
-        res.send('0');
+        // for(var w in widgets) {
+        //     if(widgets[w]._id === wid) {
+        //         //result.push(websites[w]);
+        //         res.send(widgets[w]);
+        //         return;
+        //     }
+        // }
+        // res.send('0');
     }
 
 
     function updateWidget(req, res) {
         var widget = req.body;
         var wid = req.params.widgetId;
-        for(var w in widgets) {
-            if(widgets[w]._id === wid) {
-                widgets[w] = widget;
-                res.sendStatus(200);
-                return;
-            }
-        }
-        res.send(400);
+
+        widgetModel
+            .updateWidget(wid, widget)
+            .then(
+                function(status) {
+                    res.send(200);
+                },
+                function(error) {
+                    res.statusCode(400).send(error);
+                }
+            );
+
+        // for(var w in widgets) {
+        //     if(widgets[w]._id === wid) {
+        //         widgets[w] = widget;
+        //         res.sendStatus(200);
+        //         return;
+        //     }
+        // }
+        // res.send(400);
     }
 
 
     function deleteWidget(req, res) {
         var wid = req.params.widgetId;
-        for(var w in widgets) {
-            if(widgets[w]._id === wid) {
-                widgets.splice(w, 1);
-            }
-        }
-        res.send(200);
+
+        widgetModel
+            .deleteWidget(wid)
+            .then(
+                function(status){
+                    res.send(200);
+                },
+                function(error){
+                    res.statusCode(404).send(err);
+                }
+            );
+
+
+        // for(var w in widgets) {
+        //     if(widgets[w]._id === wid) {
+        //         widgets.splice(w, 1);
+        //     }
+        // }
+        // res.send(200);
     }
 
     function uploadImage(req, res) {
@@ -96,13 +153,13 @@ module.exports = function(app) {
         var websiteId = req.body.websiteId;
         var pageId = req.body.pageId;
         var myFile = req.file;
-        var widgetId = req.body.widgetId ;
-        var width = req.body.width ;
-        var redirectUrl = "/assignment/#/user/"+ userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
+        var widgetId = req.body.widgetId;
+        var width = req.body.width;
+        var redirectUrl = "/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
 
         console.log(redirectUrl);
 
-        if(myFile == null){
+        if (myFile == null) {
             res.redirect(redirectUrl);
             return;
         }
@@ -114,18 +171,44 @@ module.exports = function(app) {
         var size = myFile.size;
         var mimetype = myFile.mimetype;
 
-        for(var i in widgets){
-            if(widgets[i]._id === widgetId){
-                widgets[i].url = "/uploads/"+filename;
-            }
-        }
-        console.log(req.body);
-        res.redirect("/assignment/#/user/"+ userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
+        widgetModel
+            .findWidgetById(widgetId)
+            .then(
+                function (widget) {
+                    widget.url = "/uploads/" + filename;
 
-        // console.log(req.body);
-        // res.redirect("/assignment/index.html#/user/"+req.body.uid+"/website/"+req.body.wid+"/page/"+req.body.pid+"/widget/"+widgetId);
-
+                    widgetModel
+                        .updateWidget(widgetId, widget)
+                        .then(
+                            function (uWidget) {
+                                res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId);
+                            },
+                            function (error) {
+                                res.sendStatus(400).send(error);
+                            }
+                        );
+                },
+                function (error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
+        function sortWidget(req, res) {
+            var pageId = req.params.pageId;
+            var start = parseInt(req.query.initial);
+            var end = parseInt(req.query.final);
+            widgetModel
+                .reorderWidget(pageId, start, end)
+                .then(
+                    function(status){
+                        res.sendStatus(200);
+                    },
+                    function (error) {
+                        res.sendStatus(400);
+                    }
+                );
+
+        }
 
 };

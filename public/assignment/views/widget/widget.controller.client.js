@@ -3,7 +3,8 @@
         .module("WebAppMaker")
         .controller("WidgetListController", WidgetListController)
         .controller("NewWidgetController",NewWidgetController)
-        .controller("EditWidgetController",EditWidgetController);
+        .controller("EditWidgetController",EditWidgetController)
+        .controller("FlickrImageSearchController",FlickrImageSearchController);
 
     function WidgetListController($sce, $routeParams, WidgetService, $location) {
         var vm = this;
@@ -42,8 +43,9 @@
         }
 
         function editWidget(w){
+            // console.log(w);
 
-            if (w.widgetType === "YOUTUBE" || w.widgetType === "IMAGE" || w.widgetType === "HEADER"){
+            if (w.type === "YOUTUBE" || w.type === "IMAGE" || w.type === "HTML"|| w.type === "HEADING" || w.type === "TEXT"){
                 $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + w._id);
             }
             else{
@@ -51,25 +53,33 @@
             }
 
         }
+
     }
 
     function NewWidgetController($location ,$routeParams, WidgetService){
         var vm = this;
-        vm.uid = $routeParams.uid;
-        vm.wid = $routeParams.wid;
-        vm.pid = $routeParams.pid;
-        vm.wgid = $routeParams.wgid;
-        vm.createYoutubeWidget = {"_id": "" , "widgetType": "YOUTUBE", "pageId": vm.pid, "width": "" , "url": "" };
-        vm.createHeaderWidget ={ "_id": "", "widgetType": "HEADER", "pageId": vm.pid, "size": "", "text": ""};
-        vm.createImageWidget= { "_id": "", "widgetType": "IMAGE", "pageId": vm.pid, "width": "", "url": ""};
         vm.createWidget = createWidget;
 
-        function createWidget(newWidgetType) {
 
+            vm.uid = $routeParams.uid;
+            vm.wid = $routeParams.wid;
+            vm.pid = $routeParams.pid;
+            vm.wgid = $routeParams.wgid;
+
+            vm.createYoutubeWidget = {name: "Youtube Widget", type: "YOUTUBE", width: "100%", url: "https://youtu.be/AM2Ivdi9c4E"};
+            vm.createHeaderWidget = {name: "Header Widget", type: "HEADING", size: 3, text: "Lorem ipsum"};
+            vm.createImageWidget = {name: "Image Widget", type: "IMAGE", width: "100%", url: "http://lorempixel.com/400/200/"};
+            vm.createHTMLWidget = {name: "HTML Widget", type: "HTML", text: "New HTML Widget"};
+            vm.createTextWidget = {name: "Text Widget", type: "TEXT", formatted: false, rows: 1, placeholder: "", text: "new"};
+
+
+        function createWidget(newWidgetType) {
+                // console.log(newWidgetType);
                 var promise = WidgetService.createWidget(vm.pid, newWidgetType);
                 promise
                     .success(function (widget) {
-                        //console.log(page);
+                        // console.log(widget);
+                        // console.log(widget._id);
                         $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
                     })
                     .error(function (ERROR) {
@@ -124,6 +134,50 @@
                 })
                 .error(function (ERROR) {
                     vm.error = "ERROR..OOPS!! Something went wrong.. Please try again..";
+                });
+        }
+
+    }
+
+    function FlickrImageSearchController($location ,$routeParams, FlickrService, WidgetService){
+        var vm = this;
+        vm.uid=$routeParams.uid;
+        vm.wid=$routeParams.wid;
+        vm.pid=$routeParams.pid;
+        vm.wgid=$routeParams.wgid;
+
+        vm.searchPhotos = searchPhotos;
+        vm.selectPhoto = selectPhoto;
+
+        function searchPhotos(searchText) {
+            FlickrService
+                .searchPhotos(searchText)
+                .then(
+                    function(response){
+                        data = response.data.replace("jsonFlickrApi(","");
+                        data = data.substring(0,data.length - 1);
+                        data = JSON.parse(data);
+                        vm.photos = data.photos;
+                    });
+        }
+
+        function selectPhoto(photo) {
+            console.log(photo);
+            var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server + "/" + photo.id + "_" + photo.secret + "_b.jpg";
+
+            var widget = {
+                _id : vm.wgid,
+                widgetType : 'IMAGE',
+                pageId : vm.pid,
+                url : url,
+                width: "100%"
+            };
+
+            WidgetService
+                .updateWidget(vm.wgid,widget)
+                .then(function(response){
+                    var url = "/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+vm.wgid;
+                    $location.url(url);
                 });
         }
 

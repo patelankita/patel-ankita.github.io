@@ -16,8 +16,8 @@
         };
         return api;
 
-        function sort(pageId,startIndex,endIndex){
-            var url = "/page/"+pageId+"/widget?initial="+startIndex+"&final="+endIndex;
+        function sort(pageId,start,end){
+            var url = "/page/"+pageId+"/widget?initial="+start+"&final="+end;
             return $http.put(url);
         }
 
@@ -30,7 +30,12 @@
             // widgets.push(nWidget);
             //
             // return nWidget;
-            return $http.post("/api/page/" + pageId + "/widget", widget);
+            var url = "/api/page/"+pageId+"/widget";
+            var nWidget = widget;
+            // console.log(nWidget);
+            //nWidget._page = pageId;
+            return $http.post(url, nWidget);
+
         }
 
         function findWidgetsByPageId(pageId) {
@@ -83,5 +88,10 @@
             return $http.delete(url);
 
         }
+
+        // function sortWidget(pageId,start,end){
+        //     var url = "/page/"+pageId+"/widget?initial="+start+"&final="+end;
+        //     return $http.put(url);
+        // }
     }
 })();

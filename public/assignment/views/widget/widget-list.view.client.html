@@ -28,26 +28,26 @@
     </nav>
 
     <div class="container">
-        <div class="container-fluid" jga-sortable>
-            <div ng-repeat="widget in model.widgets" class="row p-w-list pos-widget">
-                <div ng-switch="widget.widgetType">
-                    <div ng-switch-when="HEADER" ng-switch="widget.size" class="col-xs-12">
-                        <div ng-switch-when="1">
+        <div class="container-fluid" jga-sortable >
+            <div ng-repeat="widget in model.widgets | orderBy : 'order'" class="row p-w-list pos-widget">
+                <div ng-switch="widget.type">
+                    <div ng-switch-when="HEADING" ng-switch="widget.size" class="col-xs-12">
+                        <div ng-switch-when=1>
                             <h1>{{widget.text}}</h1>
                         </div>
-                        <div ng-switch-when="2">
+                        <div ng-switch-when=2>
                             <h2>{{widget.text}}</h2>
                         </div>
-                        <div ng-switch-when="3">
+                        <div ng-switch-when=3>
                             <h3>{{widget.text}}</h3>
                         </div>
-                        <div ng-switch-when="4">
+                        <div ng-switch-when=4>
                             <h4>{{widget.text}}</h4>
                         </div>
-                        <div ng-switch-when="5">
+                        <div ng-switch-when=5>
                             <h5>{{widget.text}}</h5>
                         </div>
-                        <div ng-switch-when="6">
+                        <div ng-switch-when=6>
                             <h6>{{widget.text}}</h6>
                         </div>
                     </div>
@@ -61,8 +61,19 @@
                         <img width="{{widget.width}}" src="{{widget.url}}">
                     </div>
 
-                    <div ng-switch-when="YOUTUBE" class="img-rounded col-xs-12">
-                        <iframe height="345" ng-src={{model.checkSafeURL(widget.url)}} width={{widget.width}}></iframe>
+                    <div ng-switch-when="YOUTUBE" class="col-xs-12" class="youtube-widget"  >
+                        <iframe  ng-src={{model.checkSafeURL(widget.url)}} width={{widget.width}}></iframe>
+                    </div>
+
+                    <div ng-switch-when="TEXT" class="img-rounded col-xs-12">
+
+                        <div ng-if="widget.formatted" text-angular ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],['indent','outdent'],['html']]" ng-model="widget.text">
+                        </div>
+                        <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+                               placeholder="{{widget.placeholder}}" class="form-control" ng-model="widget.text"/>
+                        <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+                                  rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                                  class="form-control">{{widget.text}}</textarea>
                     </div>
 
 

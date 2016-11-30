@@ -15,7 +15,7 @@
                 //console.log(promise);
                 promise
                     .success(function(website){
-                        //console.log(website);
+                        console.log(website);
                         if(website != '0') {
                         vm.websites = website;
                     }

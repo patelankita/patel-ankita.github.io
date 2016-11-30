@@ -6,11 +6,11 @@
                 <div class="col-xs-10">
                     <div class=" pull-left">
                         <div>
-                            <a href="#/user/{{model.uid}}/website/{{model.wid}}/page" class="navbar-link navbar-text pull-left margin-r">
+                            <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link navbar-text pull-left margin-r">
                                 <span class="glyphicon glyphicon-chevron-left"/>
                             </a>
                             <p class="navbar-text pull-right">
-                                Edit Page
+                                Widget Edit
                             </p>
                         </div>
                     </div>
@@ -18,7 +18,7 @@
 
                 <div class="col-xs-2">
                     <p class="navbar-text pull-right">
-                        <a href ng-click="model.updatePage(model.page._id,model.page)" class="navbar-link">
+                        <a href ng-click="model.updateWidget(model.widget)" class="navbar-link">
                             <span class="glyphicon glyphicon-ok"/>
                         </a>
                     </p>
@@ -30,17 +30,23 @@
     <div class="container">
         <form>
             <div class="form-group">
-                <label for="pname" class="no-margin-bottom">Name</label>
-                <input ng-model="model.page.name" type="text" class="form-control" id="pname" value="Blog Post">
 
-                <label for="ptitle" class="no-margin-bottom">Title</label>
-                <input ng-model="model.page.title" type="text" class="form-control" id="ptitle" placeholder="Page Title">
+                <label  for="witext" class="no-margin-bottom">Text</label>
+                <input ng-model="model.widget.text" type="text" class="form-control" id="witext" >
+
+                <label  for="wiRows" class="no-margin-bottom">Rows</label>
+                <input ng-model="model.widget.rows" type="number" class="form-control" id="wiRows">
+
+                <label  for="wiPlaceholder" class="no-margin-bottom">Placeholder</label>
+                <input ng-model="model.widget.placeholder" type="text" class="form-control" id="wiPlaceholder" >
+
+                <label for="wiFormatted">Formatted</label>
+                <input id="wiFormatted" ng-model="model.widget.formatted" type="checkbox"/>
+
+                <a class="btn btn-danger  btn-block"
+                   href ng-click="model.deleteWidget(model.widget)">Delete</a>
             </div>
-
-            <a class="btn btn-danger  btn-block"
-               ng-click="model.deletePage(model.page._id)">Delete</a>
         </form>
-
         <div ng-show="model.error" class="alert alert-danger" role="alert">
             {{model.error}}
         </div>
