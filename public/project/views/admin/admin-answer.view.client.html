@@ -1,10 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+
+<nav class="navbar navbar-default navbar-fixed-top topnav">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <!--<p class="navbar-brand pull-left">-->
+                <a class="navbar-brand topnav" href="#/"><img src="../../img/logo2.png" class="img-fluid" alt="Responsive image"></a>
+                <!--</p>-->
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 nav-padding">
+                <p class="navbar-brand pull-right">
+                    Admin Home Page
+                </p>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#/user/{{model.uid}}/admin/question">Questions</a></li>
+        <li role="presentation" class="active"><a>Answers</a></li>
+        <li role="presentation"><a href="#/user/{{model.uid}}/admin/user">Users</a></li>
+    </ul>
+
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
+        {{model.error}}
+    </div>
+
+    <div ng-if="model.success"
+         class="alert alert-success"
+         role="alert">
+        {{model.message}}
+    </div>
+
+    <hgroup class="mb20">
+        <h2 class="lead"><strong class="text-danger">{{model.answers.length}}</strong> Answers to be reviewed. </h2>
+        <strong class="text-danger">Posted on FindAnswers</strong>
+    </hgroup>
+
+    <section class="col-xs-12 col-sm-12 col-md-12">
+        <article class="search-result row jga-widget"
+                 ng-repeat="answer in model.answers">
+            <div class="col-xs-12 col-sm-12 col-md-8 excerpet">
+                <h4 class="icon-color">Q. <a href="#user/{{model.uid}}/admin/question/{{question._id}}" class="grey-text-light" title=""> {{answer.question_title}}</a></h4>
+                <h5 class="icon-color"> Answer:</h5><h5 class="grey-text-light"> <div ng-bind-html="model.getSafeHTML(answer.body)"></div></h5>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                <ul class="meta-search">
+                    <li><i class="glyphicon glyphicon-calendar"></i> Answered On: <date>{{answer.dateCreated | date:'mediumDate'}}</date></li>
+                </ul>
+            </div>
+            <div class="jga-widget-tool">
+                <span class="fa fa-check-circle fa-2x push-left"  data-toggle="modal" data-target="#checkModal"></span>
+                <span class="fa fa-times-circle fa-2x " data-toggle="modal" data-target="#deleteModal"></span>
+            </div>
+            <div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Confirm Marking</h4>
+                        </div>
+                        <a class="list-group-item">
+                            <h5 class="list-group-item-text icon-color">Q.{{answer.question_title}}</h5>
+                            <h4>Answer:<div class ="list-group-item-heading" ng-bind-html="model.getSafeHTML(answer.body)"></div></h4>
+                        </a>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="model.checked(answer)" data-dismiss="modal">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel1">Confirm Deletion</h4>
+                        </div>
+                        <a class="list-group-item">
+                            <h4 class="list-group-item-text">Q.{{answer.question_title}}</h4>
+                            <h4>Answer:<div class ="list-group-item-heading" ng-bind-html="model.getSafeHTML(answer.body)"></div></h4>
+                        </a>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="model.deleteAnswer(answer)" data-dismiss="modal">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="clearfix borda"></span>
+            <hr>
+        </article>
+
+    </section>
+
+    <!--<div class="list-group"-->
+    <!--ng-repeat="answer in model.answers">-->
+    <!--<a href="#user/{{model.uid}}/admin/question/{{question._id}}" class="list-group-item">-->
+    <!--{{answer.question_title}}-->
+    <!--<p>A.</p><div class="list-group-item-text" ng-bind-html="model.getSafeHTML(answer.body)">-->
+    <!--</div>-->
+    <!--</a>-->
+    <!--</div>-->
+
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-footer">
+            <div class="navbar-text pull-right">
+                <a href="#/user/{{model.user._id}}">
+                    <span class="glyphicon glyphicon-user pull-right icon-color push-up"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

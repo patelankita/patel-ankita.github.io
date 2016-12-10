@@ -18,7 +18,7 @@
 
                 <div class="col-xs-2">
                     <p class="navbar-text pull-right">
-                        <a href ng-click="model.updateWidget(model.widget)" class="navbar-link">
+                        <a href ng-click="model.updateWidget(model.widget); submitted=true" class="navbar-link">
                             <span class="glyphicon glyphicon-ok"/>
                         </a>
                     </p>
@@ -28,17 +28,24 @@
     </nav>
 
     <div class="container">
-        <form>
+        <form name="myForm">
             <div class="form-group">
                 <label  for="winame" class="no-margin-bottom">Name</label>
-                <input ng-model="model.widget.name" type="text" class="form-control" id="winame" value={{model.widget.name}}>
-
+                <input required ng-class="{ 'error-when' : submitted && myForm.name.$error.required }"
+                       ng-model="model.widget.name" type="text" class="form-control" id="winame" value={{model.widget.name}}>
+                <span ng-show="submitted && myForm.name.$error.required" class="err">
+                    *Required Field
+                </span>
+            </div>
+            <div class="form-group">
                 <label  for="witext" class="no-margin-bottom">Text</label>
                 <input ng-model="model.widget.text" type="text" class="form-control" id="witext" value={{model.widget.text}}>
-
+            </div>
+            <div class="form-group">
                 <label  for="wiurl" class="no-margin-bottom">URL</label>
                 <input ng-model="model.widget.url" type="url" class="form-control" id="wiurl">
-
+            </div>
+            <div class="form-group">
                 <label  for="wiwidth" class="no-margin-bottom">Width</label>
                 <input ng-model="model.widget.width" type="text" class="form-control" id="wiwidth" value={{model.widget.width}}>
 

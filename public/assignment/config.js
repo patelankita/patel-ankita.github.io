@@ -5,9 +5,10 @@
 
     function Config($routeProvider) {
         $routeProvider
-            .when("/", {
-                templateUrl: "views/home.html"
-            })
+            // .when("/", {
+            //     templateUrl: "views/user/login.view.client.html"
+            //     // templateUrl: "views/home.html"
+            // })
             .when("/login", {
                 templateUrl: "views/user/login.view.client.html",
                 controller: "LoginController",
@@ -18,10 +19,21 @@
                 controller:"RegisterController",
                 controllerAs: "model"
             })
-            .when("/user/:uid", {
-                templateUrl: "views/user/profile.view.client.html",
-                controller:"ProfileController",
-                controllerAs: "model"
+            .when("/profile" , {
+                templateUrl:"views/user/profile.view.client.html",
+                controller: "ProfileController",
+                controllerAs: "model",
+                resolve: {
+                     loggedIn: checkLoggedIn
+                }
+            })
+            .when("/user/:uid" , {
+                templateUrl:"views/user/profile.view.client.html",
+                controller: "ProfileController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
             })
             .when("/user/:uid/website", {
                 templateUrl: "views/website/website-list.view.client.html",
@@ -73,8 +85,47 @@
                 controller: "FlickrImageSearchController",
                 controllerAs: "model"
             })
+            // .when("/user" , {
+            //     templateUrl:"views/user/profile.view.client.html",
+            //     controller: "ProfileController",
+            //     controllerAs: "model",
+            //     resolve: {
+            //         loggedIn: checkLoggedIn
+            //     }
+            // })
             .otherwise({
-                redirectTo: "/home"
+                redirectTo:"/login"
+                // redirectTo: "/home"
             });
+
+        function checkLoggedIn(UserService,$location,$q,$rootScope){
+
+            var deferred = $q.defer();
+
+            UserService
+                .loggedIn()
+                .then(
+                    function(response){
+                        var user=response.data;
+                        console.log(user);
+                        if(user == '0'){
+                            debugger;
+                            $rootScope.currentUser=null;
+                            deferred.reject();
+                            $location.url("/login");
+                        }
+                        else {
+                            debugger;
+                            $rootScope.currentUser=user;
+                            deferred.resolve();
+                        }
+                    },
+                    function(res){
+                        $location.url("/login");
+                    }
+                );
+
+            return deferred.promise;
+        }
     }
 })();

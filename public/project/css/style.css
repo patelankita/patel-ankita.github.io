@@ -1,0 +1,344 @@
+/*
+ * Start Bootstrap - Landing Page (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+body{
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+/*body,*/
+html {
+    width: 100%;
+    height: 100%;
+    /*padding-top: 60px;*/
+
+}
+
+.margin-20-down{
+    margin-top: 20px;
+}
+
+.p-text{
+    color:#e47911;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 300;
+
+}
+
+.text-position{
+    text-align: center;
+
+}
+
+.push-up{
+    margin-bottom: 10px;
+}
+
+.grey-background{
+    background-color: #f8f8f8;
+}
+
+.push-left{
+    margin-left: 15px;
+}
+
+.p-color{
+    color: dimgrey;
+}
+
+.text-danger{
+    color: #e47911;
+}
+
+.thin-font{
+    font-weight: 300;
+}
+
+.alert-warning{
+    background-color: #4d4d4d;
+    /*border-color: #ec971f;*/
+}
+
+.alert-info{
+    background-color: #eea236;
+}
+.alert-danger{
+    background-color: #f5f5f5;
+    /*border-color: #999999;*/
+}
+
+.list-group-item{
+    navbutton_home_hovered: none;
+}
+/*.text{*/
+    /*font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    /*font-weight: 700;*/
+/*]}*/
+
+.topnav {
+    font-size: 14px;
+}
+
+.icon-color{
+    color: #e47911 !important;
+}
+
+.grey-text{
+    color: #4d4d4d;
+    font-weight: 500;
+}
+
+.grey-text-light{
+    color: #4d4d4d;
+    font-weight: 300;
+}
+
+.navbar-default .navbar-brand{
+    color: #e47911;!important;
+    font-weight: 500;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.icon-size{
+    font-size: 24px;
+}
+
+.navbar-fixed-bottom{
+    padding-top: 10px;
+}
+
+.label-size{
+    font-size: 14px; !important;
+}
+
+.nav-padding{
+    padding-top: 8px;
+}
+
+.font-aws-size{
+    font-size: large;
+}
+
+.lead {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.img-row {
+    align-content: center;
+}
+.bits-bytes-image {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    vertical-align: middle;
+    background: no-repeat center center;
+    padding-top: 20px;
+}
+.searchPush{
+    margin-top: 30px;
+}
+.searchPushMobile{
+    margin-top: 100px;
+}
+.headingPush{
+    margin-top: 50px;
+}
+
+.intro-header {
+    padding-top:0px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    /*max-width: 500px;*/
+    /*max-height: 500px;*/
+    /*vertical-align: middle;*/
+    text-align: center;
+    color: #f8f8f8;
+    background: url(../../img/logo1.png) no-repeat center center;
+    background-size: auto;
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+
+
+@import "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700";
+
+.mb20 { margin-bottom: 20px; }
+
+hgroup { padding-left: 15px; border-bottom: 1px solid #ccc; padding-top: 10px; }
+hgroup h1 { font: 500 normal 1.625em "Roboto",Arial,Verdana,sans-serif; color: #4d4d4d; margin-top: 0; line-height: 1.15; }
+hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; color: #2a3644; margin: 0; padding-bottom: 10px; }
+
+.search-result {word-wrap:break-word;}
+.container {word-wrap:break-word;}
+.search-result .thumbnail { border-radius: 0 !important; }
+.search-result:first-child { margin-top: 0 !important; }
+.search-result { margin-top: 20px; }
+.search-result .col-md-10 { border-right: 1px dotted #ccc; min-height: 140px; }
+.search-result .col-md-2 { border-right: 1px dotted #ccc; min-height: 140px; }
+.search-result ul { padding-left: 0 !important; list-style: none;  }
+.search-result ul li { font: 400 normal .85em "Roboto",Arial,Verdana,sans-serif;  line-height: 30px; }
+.search-result ul li i { padding-right: 5px; }
+.search-result .col-md-7 { position: relative; }
+.search-result h3 { font: 500 normal 1.375em "Roboto",Arial,Verdana,sans-serif; margin-top: 0 !important; margin-bottom: 10px !important; }
+.search-result h3 > a, .search-result i { color: #e47911 ; }
+.search-result p { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; }
+.search-result span.plus { position: absolute; right: 5px; top: 126px; }
+.search-result span.plus a { background-color: #248dc1; padding: 5px 5px 3px 5px; }
+.search-result span.plus a:hover { background-color: #414141; }
+.search-result span.plus a i { color: #fff !important; }
+.search-result span.border { display: block; width: 97%; margin: 0 15px; border-bottom: 1px dotted #ccc; }
+.restrict-text {width: 100px;}
+
+.intro-message > h1 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 5em;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+@media(max-width:767px) {
+    .intro-message {
+        padding-bottom: 15%;
+    }
+
+    .intro-message > h1 {
+        font-size: 3em;
+    }
+
+    ul.intro-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.intro-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+
+    .intro-divider {
+        width: 100%;
+    }
+}
+
+.network-name {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+.content-section-a {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+}
+
+.content-section-b {
+    padding: 50px 0;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.section-heading {
+    margin-bottom: 30px;
+}
+
+.section-heading-spacer {
+    float: left;
+    width: 200px;
+    border-top: 3px solid #e7e7e7;
+}
+
+.banner {
+    padding: 100px 0;
+    color: #f8f8f8;
+    background: url(../img/banner-bg.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.bannerKey {
+    padding: 100px 0;
+    color: #e7e7e7;
+    background: url(../../img/key2.png) no-repeat center center;
+    background-size: cover;
+    height: 520px;
+    opacity: .8;
+    margin-left: -20px;
+    margin-right: -20px;
+    font-family: "Helvetica Neue", Helvetica, Arial;
+}
+
+.banner h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 3em;
+}
+
+.banner ul {
+    margin-bottom: 0;
+}
+
+.banner-social-buttons {
+    float: right;
+    margin-top: 0;
+}
+
+@media(max-width:1199px) {
+    ul.banner-social-buttons {
+        float: left;
+        margin-top: 15px;
+    }
+}
+
+@media(max-width:767px) {
+    .banner h2 {
+        margin: 0;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+        font-size: 3em;
+    }
+
+    ul.banner-social-buttons > li {
+        display: block;
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    ul.banner-social-buttons > li:last-child {
+        margin-bottom: 0;
+    }
+}
+
+footer {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+}
+
+p.copyright {
+    margin: 5px 0 0;
+}

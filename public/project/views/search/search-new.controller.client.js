@@ -5,24 +5,29 @@
 (function(){
     angular
         .module("Bits&Bytes")
-        .controller("QuestionNewController",QuestionNewController);
+        .controller("SearchNewController",SearchNewController);
 
-    function QuestionNewController($sce, $location,$routeParams,QuestionService,AnswerService) {
+    function SearchNewController($sce, $location,$routeParams,SearchService, ResultService) {
         var vm = this;
         vm.uid=$routeParams.uid;
 
         vm.saveQuestion = saveQuestion;
         vm.cancelQuestion = cancelQuestion;
+        vm.homeRedirect = homeRedirect;
 
         function cancelQuestion(){
-            vm.question = "";
+            $location.url("/user/"+vm.uid+"/question/"+question.data._id);
 
         }
 
-        function saveQuestion(){
-            console.log(vm.question);
+        function homeRedirect(){
+            $location.url("/user/public/"+ vm.uid);
+        }
 
-            QuestionService
+        function saveQuestion(){
+            // console.log(vm.question);
+
+            SearchService
                 .newquestion(vm.question,vm.uid)
                 .then(
                     function(question){

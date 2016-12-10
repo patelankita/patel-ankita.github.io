@@ -1,10 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+<!--<nav class="navbar navbar-default navbar-fixed-top">-->
+    <!--<div class="container">-->
+        <!--<div class="navbar-header">-->
+            <!--<a class="navbar-brand" href="#">-->
+                <!--Find Answers-->
+            <!--</a>-->
+            <!--<p class="navbar-text pull-right">-->
+                <!--<a ng-click="model.updateUser(model.user)"-->
+                   <!--class="navbar-link pull-right">-->
+                    <!--<span class="glyphicon glyphicon-ok"></span>-->
+                <!--</a>-->
+            <!--</p>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+
+<nav class="navbar navbar-default navbar-fixed-top topnav">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <!--<p class="navbar-brand pull-left">-->
+                <a class="navbar-brand topnav" href="#/"><img src="../../img/logo2.png" class="img-fluid" alt="Responsive image"></a>
+                <!--</p>-->
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 nav-padding">
+                <p class="navbar-brand pull-right">
+                    Admin Home Page
+                </p>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#/user/{{model.uid}}/admin/question">Questions</a></li>
+        <li role="presentation"><a href="#/user/{{model.uid}}/admin/answer">Answers</a></li>
+        <li role="presentation" class="active"><a>Users</a></li>
+    </ul>
+    <div class="container">
+        <div ng-if="model.error"
+             class="alert alert-danger">
+            {{model.error}}
+        </div>
+    </div>
+    <br>
+
+    <div class="input-group">
+        <input ng-model="model.searchText"
+               type="text"
+               class="form-control"
+               placeholder="Find Other Users..">
+        <span class="input-group-btn">
+        <a ng-click="model.searchUsers(model.searchText)"
+           class="btn btn-default"
+           type="button">
+            <span class="glyphicon glyphicon-search"></span>
+        </a>
+    </span>
+    </div>
+
+    <br>
+
+    <div class="container"
+         ng-repeat="user in model.users">
+        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+            <h3 class="media-heading"><strong><a href="#/user/public/{{user._id}}" class="grey-text">{{user.firstName}} {{user.lastName}}</a></strong></h3>
+            <p class="icon-color">Username: <a href="#/user/public/{{user._id}}">{{user.username}}</a></p>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+            <p class="grey-text-light"><strong class="icon-color">About: </strong>{{user.about}}</p>
+            <p class="grey-text-light"><strong class="icon-color">Skills: </strong>{{user.skill}}</p>
+        </div>
+        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+            <hr>
+        </div>
+    </div>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-footer">
+            <div class="navbar-text pull-right">
+                <a href="#/user/{{model.user._id}}">
+                    <span class="glyphicon glyphicon-user pull-right icon-color push-up"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<!--<nav class="navbar navbar-default navbar-fixed-bottom">-->
+    <!--<div class="container">-->
+        <!--<div class="navbar-footer">-->
+            <!--<div class="navbar-text pull-right">-->
+                <!--<a href="#/user/{{model.user._id}}">-->
+                    <!--<span class="glyphicon glyphicon-user pull-right"></span>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->

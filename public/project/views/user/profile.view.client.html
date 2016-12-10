@@ -1,10 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div class="container-fluid">
+
+    <nav class="navbar navbar-default navbar-fixed-top topnav">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <!--<p class="navbar-brand pull-left">-->
+                    <a class="navbar-brand topnav" href="#/"><img src="../../img/logo2.png" class="img-fluid" alt="Responsive image"></a>
+                    <!--</p>-->
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 nav-padding">
+                    <p class="navbar-brand pull-right" >
+                        Profile
+                    </p>
+                </div>
+                <!--<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 nav-padding">-->
+                    <!--<p class="navbar-text pull-right">-->
+                        <!--<a href ng-click="model.updateUser(model.user)" class="navbar-link" >-->
+                            <!--<span class="glyphicon glyphicon-ok"/>-->
+                        <!--</a>-->
+                    <!--</p>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </nav>
+
+    <div class="container ">
+        <div ng-if="model.success" class="alert alert-success" role="alert">
+            {{model.success}}
+        </div>
+
+        <div ng-if="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
+        </div>
+
+        <div ng-if="model.message" class="alert alert-success" role="alert">
+            {{model.message}}
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="alice">
+            </div>
+
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input ng-model="model.user.firstName" type="text" class="form-control" id="firstName" placeholder="Alice">
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input ng-model="model.user.lastName" type="text" class="form-control" id="lastName" placeholder="Wonderland">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input ng-model="model.user.email" type="email" class="form-control" id="email" placeholder="alice@gmail.com">
+            </div>
+
+            <div class="form-group">
+                <label for="about">Self Description</label>
+                <input ng-model="model.user.about" type="text" class="form-control" id="about" placeholder="Describe yourself in one sentence..">
+            </div>
+
+            <div class="form-group">
+                <label for="skill">Expertise</label>
+                <input ng-model="model.user.skill" type="text" class="form-control" id="skill" placeholder="What are you best at ??">
+            </div>
+        </form>
+
+        <a class="btn btn-info btn-block"
+           ng-click="model.updateUser(model.user)"> Update </a>
+
+        <a ng-click="model.deleteUser()"
+           class="btn btn-danger  btn-block">
+            Delete
+        </a>
+        <a ng-click="model.logout()"
+           class="btn btn-warning  btn-block"
+           href="#/login">Logout</a>
+    </div>
+
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                    <a href="#/profile"><i class="fa fa-home icon-color icon-size" ></i></a>
+                </div>
+                <div class="pull-right" class="col-xs-2 col-sm-2 col-md-2 col-lg-2 nav-padding">
+                        <a href ng-click="model.homeRedirect()" >
+                            <i class="glyphicon glyphicon-search icon-color font-aws-size" aria-hidden="true"></i>
+                        </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</div>

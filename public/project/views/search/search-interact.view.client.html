@@ -1,10 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+<nav class="navbar navbar-default navbar-fixed-top topnav">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <!--<p class="navbar-brand pull-left">-->
+                <a class="navbar-brand topnav" href="#/"><img src="../../img/logo2.png" class="img-fluid" alt="Responsive image"></a>
+                <!--</p>-->
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 nav-padding">
+                <p class="navbar-brand pull-right">
+                    Question Results
+                </p>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container p-color">
+
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading icon-color">Q.{{model.question.title}}</h4>
+            <div class ="list-group-item-text" ng-bind-html="model.getSafeHTML(model.question.body)"></div>
+            <a ng-if="model.question.asked_by!='StackOverflow'" href="#/user/public/"+{{model.question.posted_by}}>Asked By: {{model.question.asked_by}}</a>
+
+            <button ng-if="model.question.posted_by === model.uid"
+                    class="btn btn-primary btn-block"
+                    data-toggle="modal" data-target="#myModal1">
+                <i class ="fa fa-pencil">Edit</i>
+            </button>
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel1">Edit Question</h4>
+                        </div>
+                        <a class="list-group-item">
+                            <h4 class="list-group-item-heading">Q. {{model.question.title}}</h4>
+                            <div class ="list-group-item-text" ng-bind-html="model.getSafeHTML(model.question.body)"></div>
+                        </a>
+                        <div class="modal-body">
+                            <div text-angular
+                                 ta-toolbar="[['bold','italics','underline','strikeThrough'],
+                                             ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                                             ['indent','outdent'],['html']]"
+                                 ng-model="model.question.body"
+                                 class="text-angular-view">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="model.updateQuestion(model.question)" data-dismiss="modal">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </br>
+    </br>
+    <div ng-if="model.answers.length > 0">
+    <div class="list-group-item">
+        <div class="list-group "  ng-repeat="ans in model.answers">
+        <!--{{ans}}-->
+            <h4 class="icon-color">Answer:</h4>
+            <div class ="list-group-item-heading no-highlight" ng-bind-html="model.getSafeHTML(ans.body)"></div>
+            <a ng-if="ans.asked_by!='StackOverflow' && ans.asked_by"
+               href="#/user/public/"+{{model.answer.answered_by}}>
+                Answered by {{ans.asked_by}}
+            </a>
+            <button ng-if="ans.answered_by === model.uid"
+                    class="btn btn-primary btn-block"
+                    data-toggle="modal" data-target="#myModal" ng-click="model.editAnswer(ans)">
+                <i class ="fa fa-pencil">Edit</i>
+            </button>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Edit Answer</h4>
+                        </div>
+                        <a class="list-group-item">
+                            <h4 class="list-group-item-heading">Q. {{model.question.title}}</h4>
+                            <div class ="list-group-item-text" ng-bind-html="model.getSafeHTML(model.question.body)"></div>
+                        </a>
+                        <div class="modal-body">
+                            <!--{{model.answers}}-->
+                            <div text-angular
+                                 ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+                                             ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                                             ['indent','outdent'],['html']]" ng-model="model.selectedanswer.body" name="user_answer" class="text-angular-view">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="model.updateAnswer(model.selectedanswer)" data-dismiss="modal">Save changes</button>
+                        </div>
+                        <!--{{ans}}-->
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+    </div>
+    </div>
+    </div>
+
+    <div><h1 class="icon-color"> Want to answer ?</h1></div>
+
+    <div text-angular
+         ta-toolbar="[['bold','italics','underline','strikeThrough'],
+                     ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                     ['indent','outdent'],['html']]" placeholder-text="Enter your answer here" ng-model="model.user_answer" name="user_answer" class="text-angular-view">
+    </div>
+    <br>
+    <div class="two-btns form-group">
+        <div class="btn btn-default btn-block icon-color grey-background"  ng-click="model.saveAnswer()"> Submit </div>
+    </div>
+    <!--<div class="two-btns form-group">-->
+        <!--<div class="btn btn-danger btn-block" ng-click="model.cancelAnswer()"> Cancel </div>-->
+    <!--</div>-->
+
+
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 ">
+                <a href="#/user/{{model.uid}}/question"><i class="fa fa-arrow-left icon-color nav-padding font-aws-size" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right" class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
+                <a href ng-click="model.homeRedirect()" >
+                    <i class="fa fa-users icon-color font-aws-size nav-padding" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

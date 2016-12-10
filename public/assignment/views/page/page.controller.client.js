@@ -80,13 +80,19 @@
         }initialize();
 
         function updatePage(pageId, newPage) {
-            PageService.updatePage(pageId, newPage)
-                .then(function (response) {
-                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
-                    },
-                    function (error) {
-                        vm.error = "Oops!! Page id does not match !!";
-                    });
+            if(newPage.name) {
+                PageService.updatePage(pageId, newPage)
+                    .then(function (response) {
+                            $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
+                        },
+                        function (error) {
+                            vm.error = "Oops!! Page id does not match !!";
+                        });
+            }
+            else
+            {
+                vm.error = "You did not fill all the required fields!!";
+            }
         }
 
 
@@ -99,15 +105,6 @@
                 .error(function (ERROR) {
                     vm.error = "ERROR..OOPS!! Something went wrong.. Please try again..";
                 });
-
-            // var result = PageService.deletePage(pageId);
-            // console.log(result);
-            // if (result != null) {
-            //     $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
-            // }
-            // else {
-            //     vm.error = "Oops!! Something went wrong..Please try again.."
-            // }
 
         }
 

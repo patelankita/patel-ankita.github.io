@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="stackApp">
 <head>
+    <link href="../css/bootstrap.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="app.js"></script>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Title </title>
 </head>
 <body>
-$END$
+    <div class="container-fluid" ng-controller="QuesSearchController as model" >
+
+        <h1> stack overflow data base</h1>
+
+        <div class="input-group">
+            <input ng-model="keyword" type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+         <button ng-click="model.searchQuestion(keyword)" class="btn btn-default" type="button">Go!</button>
+      </span>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>tags </th>
+                <th>title </th>
+
+
+                <!--<th>is_answered </th>-->
+                <!--<th>view_count </th>-->
+                <!--<th>accepted_answer_id </th>-->
+                <!--<th>title </th>-->
+                <!--<th>body </th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="post in model.posts">
+
+                <td>{{post.tags[0]}}</td>
+                <td>{{post.title}}</td>
+                <!--<td>{{post.is_answered}}</td>-->
+                <!--<td>{{post.view_count}}</td>-->
+                <!--<td>{{post.accepted_answer_id}}</td>-->
+                <!--<td>{{post.title}}</td>-->
+                <!--<td> <div ng-bind-html-unsafe="<b>hi</b>"></div> </td>-->
+            </tr>
+            </tbody>
+        </table>
+        <!--{{model.poss}}-->
+    </div>
+
+
 </body>
 </html>

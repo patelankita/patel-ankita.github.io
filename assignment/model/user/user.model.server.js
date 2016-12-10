@@ -11,6 +11,7 @@ module.exports = function(){
         findUserById: findUserById,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
+        findFacebookUser: findFacebookUser,
         setModel : setModel
     };
 
@@ -25,13 +26,11 @@ module.exports = function(){
     }
 
     function findUserByCredentials(username , password){
-        return userModel.find({username: username, password: password});
+        return userModel.findOne({username: username, password: password});
     }
 
     function findUserByUsername(username) {
-        return userModel.find({
-            username: username
-        });
+        return userModel.findOne({username: username});
     }
 
     function createUser(user){
@@ -49,4 +48,9 @@ module.exports = function(){
             .update({_id: userId},{
                 $set: nUser });
     }
+
+    function findFacebookUser(id){
+        return User.findOne({"facebook.id": id});
+    }
+
 }

@@ -1,10 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+<!--<nav class="navbar navbar-default navbar-fixed-top">-->
+    <!--<div class="container">-->
+        <!--<div class="navbar-header">-->
+            <!--<p class="navbar-text pull-left">-->
+                <!--<a ng-click="model.goBack()"-->
+                   <!--class="navbar-link pull-right">-->
+                    <!--<span class="glyphicon glyphicon-menu-left"></span>-->
+                <!--</a>-->
+            <!--</p>-->
+            <!--<a class="navbar-brand" href="#">-->
+                <!--User Search-->
+            <!--</a>-->
+            <!--<p class="navbar-text pull-right">-->
+                <!--<a ng-click="model.updateUser(model.user)"-->
+                   <!--class="navbar-link pull-right">-->
+                    <!--<span class="glyphicon glyphicon-ok"></span>-->
+                <!--</a>-->
+            <!--</p>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+
+<nav class="navbar navbar-default navbar-fixed-top topnav">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <!--<p class="navbar-brand pull-left">-->
+                <a class="navbar-brand topnav" href="#/"><img src="../../img/logo2.png" class="img-fluid" alt="Responsive image"></a>
+                <!--</p>-->
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 nav-padding">
+                <p class="navbar-brand pull-right">
+                    Search User
+                </p>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+    <div ng-if="model.error"
+         class="alert alert-danger margin-5 margin-5 margin-5">
+        {{model.error}}
+    </div>
+    <div class="input-group">
+        <input ng-model="model.searchText"
+               type="text"
+               class="form-control"
+               placeholder="Find Other Users..">
+        <span class="input-group-btn">
+        <a ng-click="model.searchUsers(model.searchText)"
+           class="btn btn-default"
+           type="button">
+            <span class="glyphicon glyphicon-search"></span>
+        </a>
+    </span>
+    </div>
+</div>
+<br>
+<br>
+
+<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1"
+     ng-repeat="user in model.users">
+    <div class="col-lg-4 col-md-6 col-xs-12 col-sm-12">
+        <h3 class="media-heading"><strong><a href="#/user/public/{{user._id}}?parentUserID={{model.uid}}" class="icon-color thin-font">{{user.firstName}} {{user.lastName}}</a></strong></h3>
+        <p class="icon-color">Username: <a href="#/user/public/{{user._id}}?parentUserID={{model.uid}}">{{user.username}}</a></p>
+    </div>
+    <div class="col-lg-8 col-md-6 col-xs-12 col-sm-12">
+        <p ><strong class="icon-color">About: </strong>{{user.about}}</p>
+        <p ><strong class="icon-color">Skills: </strong>{{user.skill}}</p>
+    </div>
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <hr>
+    </div>
+</div>
+
+<!--<nav class="navbar navbar-default navbar-fixed-bottom">-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="navbar-footer">-->
+            <!--<p class="navbar-text pull-right">-->
+                <!--<a href="#/user/{{model.userId}}" class="navbar-link nav-padding icon-color">-->
+                  <!--<span class="glyphicon glyphicon-user">-->
+                  <!--</span>-->
+                <!--</a>-->
+            <!--</p>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 ">
+                <!--<a href ng-click="model.homeRedirect()"><i class="fa fa-arrow-left icon-color nav-padding font-aws-size" aria-hidden="true"></i></a>-->
+            </div>
+            <div class="pull-right" class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
+                <a href="#/user/{{model.userId}}" class="navbar-link nav-padding icon-color">
+                  <span class="glyphicon glyphicon-user">
+                  </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,10 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+<!--<nav class="navbar navbar-default navbar-fixed-top">-->
+    <!--<div class="container">-->
+        <!--<div class="navbar-header">-->
+            <!--<p class="navbar-text pull-left">-->
+            <!--</p>-->
+            <!--<a class="navbar-brand">-->
+                <!--Post Your Question-->
+            <!--</a>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+
+<nav class="navbar navbar-default navbar-fixed-top topnav">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+                <a class="navbar-brand topnav" href="#/"><img src="../../img/logo2.png" class="img-fluid" alt="Responsive image"></a>
+
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 nav-padding">
+                <p class="navbar-brand pull-right">
+                    Post A Question
+                </p>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <label for="name">Question </label>
+    <input ng-model="model.question.title" required name="name" type="text" class="form-control" id="name" placeholder="What's my question?">
+    <label for="name">Detail Description</label>
+    <div text-angular
+         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+                     ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                     ['indent','outdent'],['html']]" placeholder-text="Enter your question here" ng-model="model.question.body" name="question">
+    </div>
+
+    <div class="two-btns form-group">
+        <div class="btn btn-primary btn-block" ng-click="model.saveQuestion()"> Submit </div>
+    </div>
+    <div class="two-btns form-group">
+        <div class="btn btn-danger btn-block" ng-click="model.cancelQuestion()"> Cancel </div>
+    </div>
+</div>
+
+<!--<nav class="navbar navbar-default navbar-fixed-bottom">-->
+    <!--<div class="container">-->
+        <!--<div class="navbar-footer">-->
+            <!--<div class="navbar-text pull-right ">-->
+                <!--<a href="#/user/project/{{model.uid}}/question">-->
+                    <!--<span class="glyphicon glyphicon-user icon-color font-aws-size pull-right"></span>-->
+                <!--</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 ">
+                <a href="#/user/{{model.uid}}/question"><i class="fa fa-arrow-left icon-color nav-padding font-aws-size" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right" class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
+                <a href ng-click="model.homeRedirect()" >
+                    <i class="fa fa-users icon-color font-aws-size nav-padding" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

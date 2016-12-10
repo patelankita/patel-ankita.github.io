@@ -18,7 +18,7 @@
 
                 <div class="col-xs-2">
                     <p class="navbar-text pull-right">
-                        <a href ng-click="model.updateWidget(model.widget)" class="navbar-link">
+                        <a href ng-click="model.updateWidget(model.widget); submitted=true" class="navbar-link">
                             <span class="glyphicon glyphicon-ok"/>
                         </a>
                     </p>
@@ -28,18 +28,25 @@
     </nav>
 
     <div class="container">
-        <form>
+        <form name="myForm">
             <div class="form-group">
 
                 <label  for="witext" class="no-margin-bottom">Text</label>
-                <input ng-model="model.widget.text" type="text" class="form-control" id="witext" >
-
+                <input required ng-class="{ 'error-when' : submitted && myForm.name.$error.required }"
+                       ng-model="model.widget.text" type="text" class="form-control" id="witext" >
+                <span ng-show="submitted && myForm.name.$error.required" class="err">
+                    *Required Field
+                </span>
+            </div>
+            <div class="form-group">
                 <label  for="wiRows" class="no-margin-bottom">Rows</label>
                 <input ng-model="model.widget.rows" type="number" class="form-control" id="wiRows">
-
+            </div>
+            <div class="form-group">
                 <label  for="wiPlaceholder" class="no-margin-bottom">Placeholder</label>
                 <input ng-model="model.widget.placeholder" type="text" class="form-control" id="wiPlaceholder" >
-
+            </div>
+            <div class="form-group">
                 <label for="wiFormatted">Formatted</label>
                 <input id="wiFormatted" ng-model="model.widget.formatted" type="checkbox"/>
 

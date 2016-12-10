@@ -1,10 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="Bits&Bytes">
 <head>
     <meta charset="UTF-8">
-    <title>Project Home Page</title>
+    <!--<meta name="apple-mobile-web-app-capable" content="yes">-->
+    <!--<meta name="apple-mobile-web-app-status-bar-style" content="black">-->
+    <meta name = "viewport" content = "initial-scale = 1.25, user-scalable = no">
+    <title>Bits&Bytes</title>
+
+    <!--<link rel="icon" href="../img/logo.png"/>-->
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="../css/textAngular.css" rel="stylesheet"/>
+    <link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.0.0/bootstrap-social.min.css" rel="stylesheet">
+    <!--for social link buttons-->
+
+    <link href="css/style.css" rel="stylesheet"/>
+    <!--<link href="css/landing-page.css" rel="stylesheet">-->
+    <!--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+    <script src="../js/textAngular-rangy.min.js"></script>
+    <script src="../js/textAngular-sanitize.min.js"></script>
+    <script src="../js/textAngular.min.js"></script>
+    <!--<link href="https://cdn.jsdelivr.net/animatecss/3.5.2/animate.min.css" rel="stylesheet"/>-->
+    <!--<script src="../js/jquery-home.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="../js/jquery-home.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+
+
+    <!--<script src="directives/wam-directives.js"></script>-->
+    <script src="app.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+    <script src="config.js"></script>
+
+    <script src="views/home/homePage.controller.client.js"></script>
+    <script src="views/home/homeRes.controller.client.js"></script>
+
+    <script src="views/user/login.controller.client.js"></script>
+    <script src="views/user/profile.controller.client.js"></script>
+    <script src="views/user/register.controller.client.js"></script>
+    <script src="views/user/user-search.controller.client.js"></script>
+    <script src="views/user/my-profile.controller.client.js"></script>
+
+    <script src="views/search/search-home.controller.client.js"></script>
+    <script src="views/search/search-new.controller.client.js"></script>
+    <script src="views/search/search-interact.controller.client.js"></script>
+
+    <script src="views/admin/admin-answer.controller.client.js"></script>
+    <script src="views/admin/admin-home.controller.client.js"></script>
+
+    <script src="service/user.service.client.js"></script>
+    <script src="service/search.service.client.js"></script>
+    <script src="service/result.service.client.js"></script>
+    <script src="service/stack.service.client.js"></script>
+
 </head>
+
 <body>
-    <h1>Project Home Page</h1>
+<div ng-view>
+    Project Home Page
+</div>
 </body>
+
 </html>

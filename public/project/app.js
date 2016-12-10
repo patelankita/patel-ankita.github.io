@@ -1,3 +1,4 @@
-/**
- * Created by Ankita on 12/6/16.
- */
+(function (){
+    angular
+        .module("Bits&Bytes", ["ngRoute" , "textAngular"]);
+})();

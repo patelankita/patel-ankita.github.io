@@ -1,26 +1,55 @@
-<div class="container">
-    <h1>Register</h1>
-
-    <div ng-show="model.error" class="alert alert-danger" role="alert">
+<div class ="container">
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
         {{model.error}}
     </div>
 
-    <input type="text"
-           class="form-control"
-           ng-model="model.user.username"
-           placeholder="username"/>
-    <input type="password"
-           ng-model="model.user.password"
-           class="form-control"
-           placeholder="password"/>
-    <input type="password"
-           ng-model="model.user.verifyPassword"
-           class="form-control"
-           placeholder="verify password"/>
+    <div class="form-group" ng-form name="myForm">
+        <h1>Register</h1>
+        <input ng-model="username" required
+               ng-class="{ 'error-when' : submitted && myForm.username.$error.required }"
+               name="username"
+               class="form-control"
+               placeholder="username"
+               type="text"/>
+        <span ng-show="submitted && myForm.username.$error.required"
+              class="err">
+            *Required Field
+        </span>
+        <input ng-model="password" required
+               ng-class="{ 'error-when' : submitted && model.perror , 'error-also' : submitted && myForm.vpassword.$error.required  }"
+               name="password"
+               class="form-control"
+               placeholder="password"
+               type="password"/>
+        <span ng-show="submitted && myForm.password.$error.required"
+              class="err">
+            *Required Field
+        </span>
+        <span  ng-show="submitted && model.perror"
+               class="err">
+            *{{model.perror}}
+        </span>
+        <input ng-model="vpassword" required
+               ng-class="{ 'error-when' : submitted && model.perror , 'error-also' : submitted && myForm.vpassword.$error.required}"
+               name="vpassword"
+               class="form-control"
+               placeholder="verify password"
+               type="password"/>
+        <span ng-show="submitted && myForm.vpassword.$error.required"
+              class="err">
+            *Required Field
+        </span>
+        <span  ng-show="submitted && model.perror"
+               class="err">
+            *{{model.perror}}
+        </span>
+    </div>
 
-    <a ng-click="model.register(model.user)"
-       class="btn btn-primary btn-block">Register</a>
-    <a class="btn btn-danger  btn-block"
-       href="#/login">Cancel</a>
+    <a ng-click="model.createUser(username,password,vpassword); submitted=true"
+       class="btn btn-primary btn-block"
+       role="button">Register</a>
+    <a class="btn btn-danger btn-block" href="#/login" role="button">Cancel</a>
 
 </div>

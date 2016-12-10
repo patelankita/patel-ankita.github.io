@@ -33,45 +33,50 @@
         vm.uid = $routeParams.uid;
         vm.createNewWebsite = createNewWebsite;
 
-        function init(){
+        function init() {
             var promise = WebsiteService.findWebsiteByUser(vm.uid);
             promise
-                .success(function(website){
-                    if(website != '0') {
+                .success(function (website) {
+                    if (website != '0') {
                         vm.websites = website;
                     }
                 })
-                .error(function(ERROR){
+                .error(function (ERROR) {
                     vm.error = "ERROR";
                 });
         }
+
         init();
 
-        function createNewWebsite(newWebsite){
-            if(newWebsite.name === null){
-                vm.error="Please enter the Name of the website";
-            }
-            else{
-                var promise = WebsiteService.createWebsite($routeParams.uid, newWebsite);
-                promise
-                    .success(function (website) {
-                       // console.log(website);
-                        $location.url("/user/" + $routeParams.uid + "/website");
-                    })
-                    .error(function (ERROR) {
-                        vm.error = "ERROR..OOPS!! Something went wrong.. Please try again..";
-                    });
-                // console.log(newCreatedWebsite);
-                // if (newCreatedWebsite) {
-                //     $location.url("/user/" + $routeParams.uid +"/website");
+        function createNewWebsite(newWebsite) {
+            if (newWebsite.name) {
+                var newWebsite = {
+                    // _id: (new Date()).getTime()+"",
+                    name: newWebsite.name,
+                    // desc: desc,
+                    _user: vm.uid
+                };
+                // if(newWebsite.name === null){
+                //     vm.error="Please enter the Name of the website";
                 // }
-                // else {
-                //     vm.error = "OOPS!! Something went wrong.. Please try again.."
-                // }
+                // else{
+                WebsiteService
+                    .createWebsite($routeParams.uid, newWebsite)
+                    .then(function (response) {
+                        var newWeb = response.data;
 
+                        if (newWeb) {
+                            $location.url("/user/" + vm.uid + "/website");
+                        }
+                        else {
+                            vm.error = "Unable to create website";
+                        }
+                });
+            }
+            else {
+                vm.error = "You did not fill all the required fields!!";
             }
         }
-
     }
 
     function EditWebsiteController($routeParams, WebsiteService, $location) {
@@ -112,25 +117,20 @@
 
 
         function updateWebsite(webId, newWebsite) {
+            if(newWebsite.name) {
 
-            WebsiteService.updateWebsite(webId, newWebsite)
-                .then(function (response) {
-                        $location.url("/user/" + $routeParams.uid + "/website");
-                    },
-                    function (error) {
-                        vm.error = "Oops!! Website id does not match !!";
-                    });
+                WebsiteService.updateWebsite(webId, newWebsite)
+                    .then(function (response) {
+                            $location.url("/user/" + $routeParams.uid + "/website");
+                        },
+                        function (error) {
+                            vm.error = "Oops!! Website id does not match !!";
+                        });
+            }
+            else {
+                vm.error = "You did not fill all the required fields!!";
+            }
 
-            // var promise = WebsiteService.updateWebsite(webId, newWebsite);
-            // promise
-            //     .success
-            //  console.log(nWebsite);
-            // if (nWebsite) {
-            //     $location.url("/user/" + $routeParams.uid + "/website");
-            // }
-            // else {
-            //     vm.error = "Oops!! Website id does not match !!"
-            // }
         }
 
         function deleteWebsite(websiteId) {

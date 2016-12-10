@@ -20,32 +20,38 @@
 </nav>
 
     <div class="container">
-        <div ng-show="model.error" class="alert alert-danger" role="alert">
-            {{model.error}}
-        </div>
-        <div ng-show="model.success" class="alert alert-success" role="alert">
+        <div ng-if="model.success" class="alert alert-success" role="alert">
             {{model.success}}
+        </div>
+
+        <div ng-if="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
         </div>
         <form>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" ng-model="model.user.username" class="form-control" id="username" placeholder="Username">
-
+                <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Alicia">
+            </div>
+            <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" ng-model="model.user.email" class="form-control" id="email" placeholder="alice@wonderland.com" required="true">
-
+                <input ng-model="model.user.email" type="email" class="form-control" id="email" placeholder="alice@wonderland.com">
+            </div>
+            <div class="form-group">
                 <label for="first-name">First Name</label>
-                <input type="text" ng-model="model.user.firstName" class="form-control" id="first-name" placeholder="Alice">
-
+                <input ng-model="model.user.firstName" type="text" class="form-control" id="first-name" placeholder="Alice">
+            </div>
+            <div class="form-group">
                 <label for="last-name">Last Name</label>
-                <input type="text" ng-model="model.user.lastName" class="form-control" id="last-name" placeholder="Wonderland">
+                <input ng-model="model.user.lastName" type="text" class="form-control" id="last-name" placeholder="Wonderland">
             </div>
         </form>
 
-        <a class="btn btn-primary btn-block"
-           href="#/user/{{model.user._id}}/website">Websites</a>
-        <a class="btn btn-danger  btn-block"
-           href="#/login">Logout</a>
+        <a class="btn btn-primary btn-block" href="#/user/{{model.user._id}}/website">Websites</a>
+
+        <a ng-click="model.deleteUser()" class="btn btn-danger  btn-block">Delete</a>
+
+        <a ng-click="model.logout ()" class="btn btn-danger  btn-block" href="#/login">Logout</a>
+
     </div>
 
     <nav class="navbar navbar-default navbar-fixed-bottom">

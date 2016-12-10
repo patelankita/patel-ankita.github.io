@@ -115,13 +115,19 @@
         init();
 
         function updateWidget(newWidget){
-            WidgetService.updateWidget(vm.wgid,newWidget)
-                .then(function (response) {
-                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
-                },
-                function (error) {
-                    vm.error = "Oops!! Page id does not match !!";
-                });
+            if(newWidget.name) {
+                WidgetService.updateWidget(vm.wgid, newWidget)
+                    .then(function (response) {
+                            $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+                        },
+                        function (error) {
+                            vm.error = "Oops!! Page id does not match !!";
+                        });
+            }
+            else {
+                vm.error = "You did not fill all the required fields!!";
+            }
+
 
         }
 

@@ -1,29 +1,26 @@
 
-<nav class="navbar navbar-default navbar-fixed-top">
+
+<nav class="navbar navbar-default navbar-fixed-top topnav">
     <div class="container">
-        <div class="navbar-header">
-            <p class="navbar-text pull-left">
-                <a ng-click="model.goBack()"
-                   class="navbar-link pull-right">
-                    <span class="glyphicon glyphicon-menu-left"></span>
-                </a>
-            </p>
-            <a class="navbar-brand" href="#">
-                My Profile
-            </a>
-            <p class="navbar-text pull-right">
-                <a ng-click="model.userSearch()"
-                   class="navbar-link pull-right">
-                    <span class="glyphicon glyphicon-search"></span>
-                </a>
-            </p>
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <!--<p class="navbar-brand pull-left">-->
+                <a class="navbar-brand topnav" href="#/"><img src="../../img/logo2.png" class="img-fluid" alt="Responsive image"></a>
+                <!--</p>-->
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 nav-padding">
+                <p class="navbar-brand pull-right">
+                    Activities
+                </p>
+            </div>
         </div>
     </div>
 </nav>
 
 <div class="container">
+
     <div class="row">
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+        <div class=" col-xs-12  col-lg-12">
             <div ng-if="model.following && !model.ownId" class="alert alert-success margin-horizontal-30">
                 This User follows You
             </div>
@@ -34,80 +31,107 @@
                     <p><strong>Skills: </strong>{{model.user.skill}}</p>
                 </div>
             </div>
+            <span class="clearfix borda"></span>
+            <hr>
+
             <div class="col-xs-12 divider text-center">
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>{{model.user.followed_by.length}}</strong></h2>
-                    <p><small>Followers</small></p>
+                <div class="col-xs-12 col-lg-3 emphasis">
+                    <h2><strong class="grey-text-light">{{model.user.followed_by.length}}</strong></h2>
+                    <!--<p><small>Followers</small></p>-->
+                    <!--<div ng-if="!model.follows && model.ownId">-->
+                        <!--<button type="button" class="btn btn-lg btn-block icon-color p-color grey-background"-->
+                                <!--disabled="disabled">Follow</button>-->
+                    <!--</div>-->
+                    <div ng-if="model.follows && model.ownId">
+                        <button class="btn btn-default btn-block icon-color p-color grey-background" disabled="disabled">
+                            <span class="fa fa-plus-circle"></span>
+                            Follow
+                        </button>
+                    </div>
+
+
                     <div ng-if="!model.follows && !model.ownId">
-                        <button class="btn btn-success btn-block"
+                        <button class="btn btn-default btn-block icon-color p-color grey-background"
                                 ng-click="model.follow()">
                             <span class="fa fa-plus-circle"></span>
                             Follow
                         </button>
                     </div>
                     <div ng-if="model.follows && !model.ownId">
-                        <button class="btn btn-danger btn-block"
+                        <button class="btn btn-default btn-block icon-color p-color grey-background"
                                 ng-click="model.unfollow()">
                             <span class="fa fa-minus-circle"></span>
                             UnFollow
                         </button>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>{{model.user.following.length}}</strong></h2>
-                    <p><small>Following</small></p>
-                    <button class="btn btn-info btn-block"
-                            ng-click="model.seeFollowing()">
-                        <span class="fa fa-user"></span> See Followings </button>
+
+                <div ng-if="model.ownId" class="col-xs-12 col-lg-3 emphasis">
+                        <h2><strong class="grey-text-light">{{model.user.following.length}}</strong></h2>
+                        <!--<p><small>Following</small></p>-->
+                        <button class="btn btn-default btn-block icon-color p-color grey-background"
+                                ng-click="model.seeFollowing()">
+                            <span class="glyphicon glyphicon-thumbs-up"></span> Following </button>
                 </div>
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>{{model.user.questions.length}}</strong></h2>
-                    <p><small>Questions Asked</small></p>
-                    <button class="btn btn-success btn-block"
+
+                <div class="col-xs-12 col-lg-3 emphasis">
+                    <h2><strong class="grey-text-light">{{model.user.questions.length}}</strong></h2>
+                    <!--<p><small>Questions Asked</small></p>-->
+                    <button class="btn btn-default btn-block icon-color p-color grey-background"
                             ng-click="model.seeQuestions()">
-                        <span class="fa fa-question-circle"></span>
+                        <span class="glyphicon glyphicon-eye-open"></span>
                         See Questions
                     </button>
                 </div>
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>{{model.user.answers.length}}</strong></h2>
-                    <p><small>Questions Answered</small></p>
-                    <button class="btn btn-success btn-block"
+                <div class="col-xs-12 col-lg-3 emphasis">
+                    <h2><strong class="grey-text-light">{{model.user.answers.length}}</strong></h2>
+                    <!--<p><small>Questions Answered</small></p>-->
+                    <button class="btn btn-default btn-block icon-color p-color grey-background"
                             ng-click="model.seeAnswers()">
                         <span class="fa  fa-comments"></span> See Answers </button>
-                </div>
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <div ng-if="model.admin && !model.ownId">
-                        <h2><strong>{{model.date_diff}} Days</strong></h2>
-                        <p><small> User Since </small></p>
-                        <button class="btn btn-danger btn-block margin-5"
-                                ng-click="model.deleteUser()">
-                            <span class="fa fa-user-times"></span>
-                            Delete User
-                        </button>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <div ng-if="model.admin && !model.ownId">
-                        <h2><strong><i class="fa fa-user-secret fa-2x" aria-hidden="true"></i></strong></h2>
-                        <button class="btn btn-orange btn-block margin-5"
-                                ng-click="model.makeUserAdmin()">
-                            <span class="fa fa-user-secret"></span>
-                            Make Admin
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+        <div class="col-xs-12 divider text-center">
+            <div class="col-xs-12 col-lg-3 emphasis">
+                <div ng-if="model.admin && !model.ownId">
+                    <h2><strong class="grey-text-light">{{model.date_diff}} Days</strong></h2>
+                    <!--<p><small> User Since </small></p>-->
+                    <button class="btn btn-default btn-block icon-color p-color grey-background"
+                            ng-click="model.deleteUser()">
+                        <span class="fa fa-user-times"></span>
+                        Delete User
+                    </button>
+                </div>
+            </div>
+            <div class="col-xs-12 col-lg-3 emphasis">
+                <div ng-if="model.admin && !model.ownId">
+                    <h2><strong><i class="fa fa-user-secret fa-1x" aria-hidden="true"></i></strong></h2>
+                    <button class="btn btn-default btn-block icon-color p-color grey-background"
+                            ng-click="model.makeUserAdmin()">
+                        <span class="fa fa-user-secret"></span>
+                        Make Admin
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
 </div>
+
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
-        <div class="navbar-footer">
-            <div class="navbar-text pull-right">
-                <a href="#/user/{{model.user._id}}">
-                    <span class="glyphicon glyphicon-user pull-right"></span>
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 ">
+                <a href ng-click="model.homeRedirect()"><i class="fa fa-arrow-left icon-color nav-padding font-aws-size" aria-hidden="true"></i></a>
+            </div>
+            <div class="pull-right" class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
+                <a href ng-click="model.homeRedirect()" >
+                    <i class="fa fa-users icon-color font-aws-size nav-padding" aria-hidden="true"></i>
                 </a>
             </div>
         </div>

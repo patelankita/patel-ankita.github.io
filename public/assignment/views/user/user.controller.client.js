@@ -11,27 +11,39 @@
         vm.login = login;
 
         function login(username, password) {
-            var promise = UserService.findUserByCredentials(username, password);
-            promise
-                .success(function (user) {
+            // console.log("in controller login"+username);
+            if (username && password){
+                // console.log(password);
+                UserService
+                    .login(username, password)
+                    .then(function (response) {
 
-                    if (user === '0') {
-                        vm.error = "No such user";
-                    } else {
-                        $location.url("/user/" + user._id);
-                    }
-                })
-                .error(function (ERROR) {
-                    vm.error = "ERROR!!";
-                });
+                            var user = response.data;
+                            // console.log("near redirect"+user);
+                            // console.log(user);
+                            if (user)
+                                $location.url("/user/" + user._id);
+                            else
+                                vm.error = "User not found";
+                        },
+                        function (err) {
+                            vm.error = "User not found";
+                        });
+            }
+            else{
+                vm.error("Oops !! Please enter username and password!!")
+            }
+
         }
 
     }
 
-    function ProfileController(UserService, $routeParams) {
+    function ProfileController($location ,UserService, $routeParams) {
 
         var vm = this;
         vm.updateUser = updateUser;
+        vm.deleteUser = deleteUser;
+        vm.logout =logout;
 
         var userId = $routeParams.uid;
         //console.log(userId);
@@ -62,35 +74,73 @@
 
 
         }
+
+        function deleteUser(){
+            UserService
+                .deleteUser(userId)
+                .then(
+                    function(response){
+                        $location.url("/login");
+                        console.log("deleted");
+                    },
+                    function(){
+                        vm.error = "Cannot delete"
+                        console.log(vm.error);
+                    }
+                );
+        }
+
+
+        function logout(){
+            UserService
+                .logout()
+                .then(
+                    function(response){
+                        $location.url("/login");
+                    },
+                    function(){
+                        $location.url("/login");
+                    }
+                )
+        }
     }
 
     function RegisterController($location, UserService) {
         var vm = this;
-        vm.register = register;
+        vm.createUser = createUser;
 
-        function register(newUser) {
-            if (newUser.password === newUser.verifyPassword) {
-                var userExistPromise = UserService.findUserByUsername(newUser.username);
-                // console.log(userExistPromise);
-                userExistPromise
-                    .success(function (user){
-                        vm.error = "OOPS!! User already exists.";
-                    })
-                    .error(function(error){
-                        var promise = UserService.createUser(newUser);
-                        promise
-                            .success(function (user) {
-                                // console.log(user);
-                                $location.url("/user/" + user._id);
-                            })
-                            .error(function (ERROR) {
-                                vm.error = "ERROR";
+        function createUser(username,password,vpassword) {
+            if(username && password && vpassword)
+            {
+                if(password === vpassword)
+                {
+                    var newUser = {
+                        // _id: (new Date()).getTime()+"",
+                        username: username,
+                        password: password
+                    };
+                    UserService
+                        .register(newUser)
+                        // .createUser(newUser)
+                        .then(function(response){
+                                var user = response.data;
+                                if(response.data)
+                                    $location.url("/user/"+user._id);
+                                else
+                                    vm.error = "Unable to register, please try again later!";
+                            },
+                            function(err){
+                                vm.error = err.data;
                             });
-                    });
+                }
+                else
+                {
+                    vm.error = "Password doesn't match!!!"
+                    vm.perror= "Please make sure password and verify password are both same"
+                }
             }
-
-             else{
-                 vm.error= "Passwords do not match!!"
+            else {
+                vm.error = "You did not fill all the required fields!!";
             }
         }
     }

@@ -1,10 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div class="container-fluid ">
+    <div class="row">
+        <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+            <div class="container topnav">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand topnav" href="#/"><img src="../../img/logo2.png" class="img-fluid" alt="Responsive image"></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href ng-click="model.login()">Login</a>
+                        </li>
+                        <li>
+                            <a href ng-click="model.login()">Register</a>
+                        </li>
+                        <li>
+                            <a href ng-click="model.login()">Login with <i class="fa fa-google-plus icon-color" ></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+    </div>
+
+    <div class="hidden-xs">
+        <div class="bannerKey body-diff">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-12 headingPush icon-color text-position">
+                        <h1>Lets solve your problem</h1>
+                    </div>
+                </div>
+                <div class="row input-group input-group-lg searchPush">
+                    <input ng-model="model.ques.searchText" type="text" class="form-control" placeholder="Ask Here">
+                    <span class="input-group-btn">
+                        <button ng-click="model.searchQuestions(model.ques.searchText,1)" class="btn btn-default icon-color" type="button">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="visible-xs searchPushMobile">
+            <div class="input-group input-group-lg">
+                <input ng-model="model.ques.searchText" type="text" class="form-control" placeholder="Ask your question here.."/>
+                <span class="input-group-btn">
+                        <button ng-click ="model.searchQuestions(model.ques.searchText,1)" class="btn btn-default" type="button">Go!</button>
+                    </span>
+            </div>
+    </div>
+    <div>
+        <hgroup class="mb20">
+            <h1>Top 10 Most Featured Posts</h1>
+            <h2 class="lead"
+                ng-if="model.searching">Top <strong class="text-danger">{{model.pageno * 10}}</strong> search results for <strong class="text-danger">{{model.ques.searchText}}.</strong></h2>
+            <h2 class="lead"
+                ng-show="!model.searching && !model.userid_q_search">Top <strong class="text-danger">{{model.pageno * 10}}</strong> featured Questions. </h2>
+        </hgroup>
+
+        <section class="col-xs-12 col-sm-12 col-md-12">
+            <!--{{model.questions}}-->
+            <article class="search-result row"
+                     ng-repeat="question in model.questions">
+
+                <div class="col-xs-12 col-sm-12 col-md-10 excerpet">
+                    <h3><a href="#/result/{{question.question_id}}" title="">Qs. {{question.title}}</a></h3>
+
+                    <div ng-bind-html="model.getSafeHTML(question.body)"> </div>
+                    <p class="p-text" >See More...</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <ul class="meta-search">
+                        <li><i class="fa fa-reply icon-color" aria-hidden="true" ></i> <span>{{question.answer_count}} answers</span></li>
+                        <li><i class="glyphicon glyphicon-calendar icon-color"></i> <date>Asked on {{question.creation_date | date:'mediumDate'}}</date></li>
+                    </ul>
+                </div>
+                <span class="clearfix borda"></span>
+                <hr>
+            </article>
+        </section>
+    </div>
+
+    <div class="row">
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div class="container">
+                <div class="row navbar-text navbar-right">
+                    <div class="col-lg-12 ">
+                        <a href="../index.html"><i class="fa fa-home icon-color icon-size" ></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+</div>
+
+

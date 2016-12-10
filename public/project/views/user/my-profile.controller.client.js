@@ -7,7 +7,7 @@
         .module("Bits&Bytes")
         .controller("MyProfileController",MyProfileController);
 
-    function MyProfileController($location , $routeParams , UserService , $rootScope , QuestionService , AnswerService , $window) {
+    function MyProfileController($location , $routeParams , UserService , $rootScope , SearchService , ResultService , $window) {
         var vm = this;
         vm.uid = $routeParams.uid;
         var userId = $window.sessionStorage.getItem("currentUser");
@@ -16,7 +16,12 @@
         vm.follows = false;
         vm.follow = follow;
         vm.admin = false;
-        var currentuser;
+        vm.parentUserId = $location.search()["parentUserID"] == undefined ? false : $location.search()["parentUserID"];
+
+        //var currentuser;
+        //vm.parentUserId = $location.search()[0];
+        //console.log("parent user id is");
+        //console.log("ParentUserId: "+ vm.parentUserId);
 
         vm.follow=follow;
         vm.unfollow=unfollow;
@@ -27,6 +32,8 @@
         vm.userSearch=userSearch;
         vm.seeFollowing=seeFollowing;
         vm.seeAnswers=seeAnswers;
+        vm.homeRedirect = homeRedirect;
+        // vm.goToMyPage = goToMyPage;
 
         function init() {
             vm.follows = false;
@@ -35,6 +42,8 @@
             UserService
                 .findUserByID(vm.uid)
                 .then(function (response) {
+                    console.log("checking response");
+                    console.log(response.data);
                     vm.user = response.data;
 
                     if(vm.uid === userId)
@@ -69,12 +78,12 @@
                                     vm.follows = false;
                             }
                             vm.admin = currentuser.is_admin;
-                            QuestionService
+                            SearchService
                                 .searchQuestionByUserID(vm.uid)
                                 .then(
                                     function(questions){
                                         vm.user.questions = questions.data;
-                                        AnswerService
+                                        ResultService
                                             .searchAnswerByUserID(vm.uid)
                                             .then(
                                                 function(answers){
@@ -93,7 +102,19 @@
 
         init();
 
+        function homeRedirect(){
+
+            if(vm.parentUserId){
+                $location.url("/user/public/" + vm.parentUserId);
+            }
+            else {
+                $location.url("/user/" + vm.uid+ "/question");
+            }
+        }
+
+
         function seeFollowing(){
+
             $window.sessionStorage.setItem("userSearchByUser",vm.uid);
             $window.sessionStorage.removeItem("quesSearchByUser");
             $window.sessionStorage.removeItem("quesSearchByUser_Username");
@@ -101,10 +122,12 @@
             $window.sessionStorage.removeItem("userSearch");
             $window.sessionStorage.removeItem("answerSearchByUser");
             $window.sessionStorage.removeItem("answerSearchByUser_Username");
+
             if(vm.admin)
                 $location.url("/user/"+userId+"/admin/user");
             else
-                $location.url("/user/search");
+                // console.log("inside following hahahaha");
+                $location.url("/user/search/"+userId);
         }
 
         function userSearch(){
