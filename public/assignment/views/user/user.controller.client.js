@@ -22,7 +22,8 @@
                             // console.log("near redirect"+user);
                             // console.log(user);
                             if (user)
-                                $location.url("/user/" + user._id);
+                                //$location.url("/user/" + user._id);
+                                $location.url("/user");
                             else
                                 vm.error = "User not found";
                         },
@@ -38,17 +39,17 @@
 
     }
 
-    function ProfileController($location ,UserService, $routeParams) {
+    function ProfileController($location ,UserService, $routeParams, $rootScope) {
 
         var vm = this;
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
         vm.logout =logout;
 
-        var userId = $routeParams.uid;
+        var id = $rootScope.currentUser._id;
         //console.log(userId);
         function init() {
-            var promise = UserService.findUserById(userId);
+            var promise = UserService.findUserById(id);
             promise
                 .success(function(user){
                     //console.log(user);

@@ -43,7 +43,7 @@ module.exports = function(app, model) {
     app.post('/api/register',register);
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/facebook/callback', passport.authenticate('facebook',
-        {successRedirect: '/assignment/#/profile', failureRedirect: '/assignment/#/login'}));
+        {successRedirect: '/assignment/#/user', failureRedirect: '/assignment/#/login'}));
 
 
 
@@ -244,12 +244,12 @@ module.exports = function(app, model) {
         if(username&&password){
             findUserByCredentials(username,password,req,res);
         }
-        else
-        if(username){
+        else if(username){
             findUserByUsername(username,res);
         }
-        else
-            res.send(users);
+        else {
+            res.send(req.user);
+        }
        //  console.log("mmt");
        //  var params = req.params;
        //  var query = req.query;

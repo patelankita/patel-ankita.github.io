@@ -50,7 +50,7 @@ module.exports = function(){
     }
 
     function findFacebookUser(id){
-        return User.findOne({"facebook.id": id});
+        return userModel.findOne({"facebook.id": id});
     }
 
 }
