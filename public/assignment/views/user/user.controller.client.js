@@ -9,6 +9,7 @@
 
         var vm = this;
         vm.login = login;
+        vm.error=null;
 
         function login(username, password) {
             // console.log("in controller login"+username);
@@ -32,7 +33,7 @@
                         });
             }
             else{
-                vm.error("Oops !! Please enter username and password!!")
+                vm.error="Oops !! Please enter username and password!!";
             }
 
         }

@@ -1,9 +1,9 @@
 (function(){
     angular
         .module("Bits&Bytes")
-        .config(Config);        /*specific function to handle configuration */
+        .config(Config);
 
-    function Config($routeProvider){   /*Well know angular object in ng-modular ,  used for dependency injection*/
+    function Config($routeProvider){
         $routeProvider
             .when("/" , {
                 templateUrl:"views/home/homePage.view.client.html",

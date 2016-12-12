@@ -31,14 +31,6 @@
         </div>
 
 
-        <!--<div class="input-group">-->
-            <!--<input ng-model="model.ques.searchText" type="text" class="form-control" placeholder="Search...">-->
-            <!--<span class="input-group-btn">-->
-                <!--<a ng-click="model.searchQuestions(model.ques.searchText,1)" class="btn btn-default" type="button">-->
-                    <!--<span class="glyphicon glyphicon-search"></span>-->
-                <!--</a>-->
-            <!--</span>-->
-        <!--</div>-->
 
         <div class="row">
             <div class="col-xs-12 col-md-4 col-lg-5">
@@ -57,12 +49,7 @@
                 ng-if="model.searching">Top <strong class="text-danger">{{model.pageno * 10}}</strong> search results for <strong class="text-danger">{{model.ques.searchText}}.</strong></h2>
             <h2 class="lead"
                 ng-show="!model.searching && !model.userid_q_search">Top <strong class="text-danger">{{model.pageno * 10}}</strong> featured Questions. </h2>
-            <!--<h2 class="lead"-->
-                <!--ng-show="model.userid_q_search">Questions asked by <strong class="text-danger">{{model.username}}</strong></h2>-->
-            <!--<strong class="text-danger">Powered By StackOverflow and FindAnswers</strong>-->
-            <!--<h2 class="lead"-->
-                <!--ng-show="model.answerSearch">Questions answered by <strong class="text-danger">{{model.username}}</strong></h2>-->
-            <!--<strong class="text-danger">Powered By StackOverflow and FindAnswers</strong>-->
+
         </hgroup>
 
         <section class="col-xs-12 col-sm-12 col-md-12">
@@ -84,10 +71,7 @@
                 <span class="clearfix borda"></span>
                 <hr>
             </article>
-            <!--<a href="#/user/{{model.uid}}/question/new"-->
-               <!--class="btn btn-primary custom-btns btn-block">-->
-                <!--Post Your Own Question-->
-            <!--</a>-->
+
             <div class="text-center ">
                 <ul class="pagination pagination-centered pagination-responsive ">
                     <li><a ng-click="model.paginate(1)" class="icon-color">1</a></li>
@@ -113,20 +97,7 @@
 
     </div>
 
-    <!--<nav class="navbar navbar-default navbar-fixed-bottom">-->
-        <!--<div class="container">-->
-            <!--<div class="navbar-footer">-->
-                <!--<div class="navbar-text">-->
-                    <!--<a  href ng-click="model.goProfile()">-->
-                        <!--<span class="glyphicon glyphicon-user pull-right pad-rt"></span>-->
-                    <!--</a>-->
-                    <!--<a href ng-click="model.goPublicProfile()">-->
-                        <!--<span class="fa fa-users pull-left pad-lft"></span>-->
-                    <!--</a>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</nav>-->
+
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">

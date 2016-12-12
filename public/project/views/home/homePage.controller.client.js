@@ -22,25 +22,6 @@
             vm.userid_q_search = true;
             vm.answerSearch = true;
 
-            // if ($window.sessionStorage.getItem("quesSearchByUser"))
-            // {
-            //     vm.username = $window.sessionStorage.getItem("quesSearchByUser_Username");
-            //     searchQuestionsByUser($window.sessionStorage.getItem("quesSearchByUser"));
-            // }
-            // else if ($window.sessionStorage.getItem("answerSearchByUser"))
-            // {
-            //     vm.all_questions = [];
-            //     vm.username = $window.sessionStorage.getItem("answerSearchByUser_Username");
-            //     searchAnswersByUser($window.sessionStorage.getItem("answerSearchByUser"));
-            // }
-            // if($window.sessionStorage.getItem("quesSearch"))
-            // {
-            //     vm.ques.searchText = $window.sessionStorage.getItem("quesSearch");
-            //     searchQuestions(vm.ques.searchText, 1);
-            // }
-            // else {
-            //     searchFeaturedQuestions(1);
-            // }
             searchFeaturedQuestions(1);
         }
 
@@ -54,13 +35,6 @@
             console.log("in home page");
             console.log(searchText);
             console.log(pageno);
-            // $window.sessionStorage.setItem("quesSearch",searchText);
-            //
-            // $window.sessionStorage.removeItem("quesSearchByUser");
-            // $window.sessionStorage.removeItem("quesSearchByUser_Username");
-            // $window.sessionStorage.removeItem("quesSearch");
-            // $window.sessionStorage.removeItem("answerSearchByUser_Username");
-            // $window.sessionStorage.removeItem("answerSearch");
 
             vm.answerSearch = true;
             vm.userid_q_search = true;

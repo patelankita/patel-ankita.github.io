@@ -14,21 +14,17 @@
 
         vm.searchQuestionbyID = searchQuestionbyID;
         vm.searchAnswersByQuestionID = searchAnswersByQuestionID;
-        // vm.saveAnswer = saveAnswer;
-        // vm.cancelAnswer = cancelAnswer;
         vm.getSafeHTML = getSafeHTML;
         vm.searchQuestionInDB = searchQuestionInDB;
         vm.login = login;
-        // vm.updateAnswer = updateAnswer;
-        // vm.updateQuestion = updateQuestion;
 
         function init() {
             vm.answers=[];
             vm.temp_answers=[];
-            // cancelAnswer();
+
             searchQuestionbyID(vm.qid);
             searchAnswersByQuestionID(vm.qid);
-            // searchAnswersByQuestionIDinDB(vm.qid);
+
         }
 
         init();
@@ -83,26 +79,7 @@
                     });
         }
 
-        //
-        // function init_asked_by(n){
-        //     if(n >0)
-        //     {
-        //         var answer = vm.temp_answers[n-1];
-        //         UserService
-        //             .findUserByID(answer.answered_by)
-        //             .then(
-        //                 function(user){
-        //                     answer.asked_by = user.data.username;
-        //                     vm.answers.push(answer);
-        //                     init_asked_by(n-1);
-        //                 },function(err){
-        //                     answer.asked_by = "StackOverflow";
-        //                     vm.answers.push(answer);
-        //                     init_asked_by(n-1);
-        //                 }
-        //             );
-        //     }
-        // }
+
 
         function getSafeHTML(text)
         {

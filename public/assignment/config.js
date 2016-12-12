@@ -106,16 +106,16 @@
                 .loggedIn()
                 .then(
                     function(response){
-                        var user=response.data;
-                        console.log(user);
+                        var user= response.data;
+                        // console.log(user);
                         if(user == '0'){
-                            debugger;
+                            // debugger;
                             $rootScope.currentUser=null;
                             deferred.reject();
                             $location.url("/login");
                         }
                         else {
-                            debugger;
+                            // debugger;
                             $rootScope.currentUser=user;
                             deferred.resolve();
                         }
