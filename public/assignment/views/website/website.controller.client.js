@@ -51,15 +51,10 @@
         function createNewWebsite(newWebsite) {
             if (newWebsite.name) {
                 var newWebsite = {
-                    // _id: (new Date()).getTime()+"",
                     name: newWebsite.name,
-                    // desc: desc,
-                    _user: vm.uid
+                    _user: vm.uid,
+                    description: newWebsite.description
                 };
-                // if(newWebsite.name === null){
-                //     vm.error="Please enter the Name of the website";
-                // }
-                // else{
                 WebsiteService
                     .createWebsite($routeParams.uid, newWebsite)
                     .then(function (response) {
