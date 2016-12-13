@@ -16,7 +16,11 @@
         vm.homeRedirect = homeRedirect;
 
         function cancelQuestion(){
-            $location.url("/user/"+vm.uid+"/question/"+question.data._id);
+            // $location.url("/user/"+vm.uid+"/question/"+question.data._id);
+
+                $location.url("/user/public/" + vm.uid);
+
+
 
         }
 

@@ -42,7 +42,7 @@
                         <!--<button type="button" class="btn btn-lg btn-block icon-color p-color grey-background"-->
                                 <!--disabled="disabled">Follow</button>-->
                     <!--</div>-->
-                    <div ng-if="model.follows && model.ownId">
+                    <div ng-if="!model.follows && model.ownId">
                         <button class="btn btn-default btn-block icon-color p-color grey-background" disabled="disabled">
                             <span class="fa fa-plus-circle"></span>
                             Follow
@@ -131,7 +131,7 @@
             </div>
             <div class="pull-right" class="col-xs-2 col-sm-2 col-md-2 col-lg-2 ">
                 <a href ng-click="model.homeRedirect()" >
-                    <i class="fa fa-users icon-color font-aws-size nav-padding" aria-hidden="true"></i>
+                    <i class="glyphicon glyphicon-search icon-color font-aws-size nav-padding" aria-hidden="true"></i>
                 </a>
             </div>
         </div>

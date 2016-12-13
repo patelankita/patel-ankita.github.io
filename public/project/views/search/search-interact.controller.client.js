@@ -23,6 +23,7 @@
         vm.updateQuestion = updateQuestion;
         vm.editAnswer = editAnswer;
         vm.getEditAnswer= getEditAnswer;
+        vm.homeRedirect = homeRedirect;
 
         function init() {
             vm.answers=[];
@@ -34,6 +35,12 @@
         }
 
         init();
+
+        function homeRedirect(){
+            // $location.url("/user/public/" + vm.uid);
+            $location.url("/user/" +vm.uid+ "/question");
+        }
+
 
         function editAnswer(answer){
             vm.selectedanswer = answer;

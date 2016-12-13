@@ -15,6 +15,7 @@
         vm.uid = userId;
         // console.log(vm.uid);
         vm.goBack=goBack;
+        vm.homeRedirect = homeRedirect;
 
         function init(){
             if($window.sessionStorage.getItem("userSearchByUser")){
@@ -28,6 +29,11 @@
         }
 
         init();
+
+        function homeRedirect(){
+            // $location.url("/user/public/" + vm.uid);
+            $location.url("/user/public/" + vm.uid);
+        }
 
         function searchFollowing(uid){
             UserService

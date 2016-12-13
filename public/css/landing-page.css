@@ -10,6 +10,11 @@ html {
     height: 100%;
 }
 
+.profilePic{
+    height: auto;
+    width: 400px;
+}
+
 body,
 h1,
 h2,
